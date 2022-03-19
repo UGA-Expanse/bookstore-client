@@ -1,0 +1,14 @@
+{
+  "name": "bookstore-frontend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently --kill-others  \"cd server && yarn start\" \"cd client && yarn start\"",
+    "server": "\"cd server && yarn start\""
+  },
+  "start": "concurrently ",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
