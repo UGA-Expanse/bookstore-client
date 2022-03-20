@@ -24,6 +24,8 @@ import Catalog from "./containers/Catalog/CatalogPage";
 import logo from './logo.svg';
 import './App.css';
 
+// <Navigate exact from="/login" to="/catalog" />
+
 function App()
 {
     const queryClient = new QueryClient();

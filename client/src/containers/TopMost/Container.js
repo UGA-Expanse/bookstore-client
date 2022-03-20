@@ -1,17 +1,13 @@
 import {
-    Layout,
-    Button,
-    DatePicker,
-    version
+    Layout
 } from "antd";
 import "antd/dist/antd.css";
+import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import "./index.css";
 
-import Navigation from "./Navigation/Navigation";
 import Header from "./Header/Header";
 
-import logo from "../../logo.svg";
-import {useContext} from "react";
+import { useContext } from "react";
 import AppContext from "../../context/AppContext";
 
 export const Container = ({ children }) => {
@@ -22,10 +18,10 @@ export const Container = ({ children }) => {
         <Layout>
             <Header />
             <Layout>
-                <Navigation />
                 <Layout.Content>
                     { children }
                 </Layout.Content>
+                <Layout.Footer><p>UGA Expanse</p></Layout.Footer>
             </Layout>
         </Layout>
     ); // return
