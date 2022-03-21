@@ -17,7 +17,7 @@ export const Header = props => {
             <div className="ant-row">
                 <div className="ant-col ant-col-xs-24 ant-col-sm-14">
                     <Space size={"middle"}>
-                        <span className="logo">Expanse</span>
+                        <span className="logo">Expanse Bookstore</span>
                         <Search className="search-input-wrapper" placeholder="input search text" onSearch={onSearch} enterButton />
                     </Space>
                 </div>

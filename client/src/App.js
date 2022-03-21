@@ -40,8 +40,10 @@ function App()
                         <AppContext.Provider value={{ disableNavigation }}>
                             <TopMost>
                                 <Routes>
+                                    <Route exact path="/" element={<Catalog />} />
                                     <Route exact path="/catalog" element={<Catalog />} />
                                     <Route exact path="/inventory" element={<Inventory />} />
+                                    <Route exact path="/cart" element={<Inventory />} />
                                 </Routes>
                             </TopMost>
                         </AppContext.Provider>
