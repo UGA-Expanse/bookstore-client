@@ -44,7 +44,6 @@ export const Header = props => {
                             size="large"
                             addonBefore={selectAfter}
                     />
-                    <CustomerActionIcons/>
                 </Space>
             </div>
         </Layout.Header>
