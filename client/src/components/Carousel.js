@@ -11,19 +11,17 @@ export const Carousel = props => {
         textAlign: 'center',
         background: '#364d79',
     };
+
+    const bannerStyle = {
+        margin: 'auto'
+    }
     return (
         <AntDCarousel autoplay>
             <div>
-                <h3 style={contentStyle}>1</h3>
+                <img alt="BANNER 1" src={`images/promotions/banner1.webp`} style={bannerStyle}/>
             </div>
             <div>
                 <h3 style={contentStyle}>2</h3>
-            </div>
-            <div>
-                <h3 style={contentStyle}>3</h3>
-            </div>
-            <div>
-                <h3 style={contentStyle}>4</h3>
             </div>
         </AntDCarousel>
     );

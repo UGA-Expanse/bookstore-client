@@ -8,7 +8,7 @@ export const Card = props => {
     const { Meta } = AntDCard;
     let badgeText;
     if (props.quantity === 0) {
-        badgeText = "SOLD OUT";
+        badgeText = "";
     } // if
 
     return (
@@ -19,7 +19,6 @@ export const Card = props => {
             cover={<img alt="example" src={`images/${props.cover}`} />}
         >
             {badgeText && <div className="card--badge">SOLD OUT</div>}
-            <p>Card content</p>
             <p>Card content</p>
             <p>Card content</p>
         </AntDCard>

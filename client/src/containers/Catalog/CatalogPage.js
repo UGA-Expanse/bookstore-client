@@ -24,7 +24,7 @@ export const CatalogPage = props => {
             <div className="ant-col ant-col-xs-24 ant-col-sm-24">
                 <Carousel />
             </div>
-            <Space size={["small",4]} wrap={true}>
+            <Space size={["large",4]} wrap={true}>
                 {cards}
             </Space>
         </>

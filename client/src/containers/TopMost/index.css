@@ -1,3 +1,11 @@
 .App {
     padding: 0px;
 }
+
+.top-nav-row {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-end;
+    background-color: #FFFFFF;
+    border-bottom: 1px solid #f0f0f0;
+}
