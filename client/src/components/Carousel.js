@@ -5,23 +5,26 @@ import {
 export const Carousel = props => {
     console.log(props);
     const contentStyle = {
-        height: '160px',
+        maxHeight: '190px',
         color: '#fff',
         lineHeight: '160px',
         textAlign: 'center',
-        background: '#364d79',
+        background: '#ba0c2f',
+        overflow: 'hide'
     };
+
+    /* background-color: #ba0c2f !important; */
 
     const bannerStyle = {
         margin: 'auto'
     }
     return (
-        <AntDCarousel autoplay>
+        <AntDCarousel autoplay dotPosition="top" style={contentStyle}>
             <div>
                 <img alt="BANNER 1" src={`images/promotions/banner1.webp`} style={bannerStyle}/>
             </div>
             <div>
-                <h3 style={contentStyle}>2</h3>
+                <img alt="BANNER 1" src={`images/promotions/WHM22_Books_1500x300_Header.jpeg`} height="190" style={bannerStyle}/>
             </div>
         </AntDCarousel>
     );

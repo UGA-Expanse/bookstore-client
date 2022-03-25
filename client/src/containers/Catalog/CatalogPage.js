@@ -20,14 +20,23 @@ export const CatalogPage = props => {
     });
 
     return (
-        <>
-            <div className="ant-col ant-col-xs-24 ant-col-sm-24">
-                <Carousel />
-            </div>
-            <Space size={["large",4]} wrap={true}>
-                {cards}
-            </Space>
-        </>
+
+            <>
+            <Row>
+                <Col span={24}><Carousel /></Col>
+            </Row>
+            <Row>
+                <Col span={18} offset={4}>
+                    <Space size={["large",4]} wrap={true}>
+                        {cards}
+                    </Space>
+                </Col>
+            </Row>
+
+
+
+            </>
+
     ); // return
 } // export
 

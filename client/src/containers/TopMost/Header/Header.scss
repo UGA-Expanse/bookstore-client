@@ -36,7 +36,7 @@
 
 
   .header__nav {
-    width: 900px;
+    min-width: 700px;
     font-size: 16px;
 
   }
@@ -44,7 +44,8 @@
 
 
 .ant-layout-header {
-  background-color: #FFFFFF !important;
+  /* background-color: #ba0c2f !important; */
+  background-color: #fff !important;
 }
 
 .header--top-row { justify-content: flex-start; }

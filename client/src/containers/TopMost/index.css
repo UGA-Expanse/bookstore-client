@@ -9,3 +9,7 @@
     background-color: #FFFFFF;
     border-bottom: 1px solid #f0f0f0;
 }
+
+.page {
+    justify-content: space-between;
+}

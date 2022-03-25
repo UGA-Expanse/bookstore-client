@@ -7,9 +7,24 @@ import "./index.css";
 
 import Navigation from "./Navigation/Navigation";
 import Header from "./Header/Header";
+import Footer from "./Footer/Footer";
 
 import { useContext } from "react";
 import AppContext from "../../context/AppContext";
+
+const mainStyle = {
+    minHeight: '85vh',
+    backgroundColor: '#FFF',
+    alignItems: 'stretch',
+    display: 'flex'
+}
+const footerStyle = {
+    display: 'flex',
+    alignContent: 'flex-end',
+    minHeight: '100px',
+    justifyContent: 'center',
+    alignItems: 'center'
+}
 
 export const Container = ({ children }) => {
     const appContext = useContext(AppContext);
@@ -17,16 +32,15 @@ export const Container = ({ children }) => {
 
     return (
         <Layout className={"page"}>
-            <div className={"top-nav-row"}>
-                <Navigation />
-            </div>
             <Header />
-            <Layout>
+            <Layout style={mainStyle}>
                 <Layout.Content>
                     { children }
                 </Layout.Content>
             </Layout>
-            <Layout.Footer style={{ height: '200px', verticalAlign:'middle', textAlign: 'center' }}>UGA Expanse ©2022 Created by CSCI 4050 Group 10</Layout.Footer>
+            <Layout.Footer style={footerStyle}>
+                <Footer/>
+            </Layout.Footer>
         </Layout>
     ); // return
 } // export TopMost

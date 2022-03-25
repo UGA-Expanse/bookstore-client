@@ -10,6 +10,7 @@ import "./Header.scss";
 
 import "../../../components/CustomerActionIcons";
 import {CustomerActionIcons} from "../../../components/CustomerActionIcons";
+import Navigation from "../Navigation/Navigation";
 
 const { Search, Button } = Input;
 const { Option } = Select;
@@ -34,9 +35,9 @@ export const Header = props => {
 
     return (
         <Layout.Header className="header__main">
-            <div className="ant-row header--top-row">
+
                 <Space size={"medium"}>
-                    <span className="logo">Expanse</span>
+                    <span className="logo"><a href="/">Expanse</a></span>
                     <Search className="search-input-wrapper"
                             placeholder="input search text"
                             onSearch={onSearch}
@@ -44,8 +45,9 @@ export const Header = props => {
                             size="large"
                             addonBefore={selectAfter}
                     />
+                    <Navigation />
                 </Space>
-            </div>
+
         </Layout.Header>
     ); // return
 } // export Header

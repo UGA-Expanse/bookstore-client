@@ -15,8 +15,8 @@ export const Card = props => {
         <AntDCard
             title={props.title}
             bordered={true}
-            style={{ width: 300 }}
-            cover={<img alt="example" src={`images/${props.cover}`} />}
+            style={{ width: 160 }}
+            cover={<img alt="example" width="130" src={`images/${props.cover}`} />}
         >
             {badgeText && <div className="card--badge">SOLD OUT</div>}
             <p>Card content</p>

@@ -1,34 +1,9 @@
 import { useState } from 'react';
-import { Typography, Table, Radio, Divider } from 'antd';
+import { Typography, Table, PageHeader, Radio, Divider } from 'antd';
+import Stock from "./Stock";
+import InventoryControls from "./InventoryControls";
 
 const { Title } = Typography;
-const columns = [
-    {
-        title: 'Title',
-        dataIndex: 'title',
-        render: (text) => <a>{text}</a>,
-    },
-    {
-        title: 'Author(s)',
-        dataIndex: 'author',
-    },
-    {
-        title: 'ISBN',
-        dataIndex: 'isbn',
-    },
-    {
-        title: 'Publish Date',
-        dataIndex: 'date',
-    },
-    {
-        title: 'Cost',
-        dataIndex: 'cost',
-    },
-    {
-        title: 'Retail Price',
-        dataIndex: 'retail',
-    }
-];
 
 const data = [
     {
@@ -133,39 +108,28 @@ const data = [
     }
 ]; // rowSelection object indicates the need for row selection
 
-const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-        console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-    },
-    getCheckboxProps: (record) => ({
-        disabled: record.name === 'Disabled User',
-        // Column configuration not to be checked
-        name: record.name,
-    }),
-};
-
-export const InventoryPage = () => {
-    const [selectionType, setSelectionType] = useState('checkbox');
-    const gridStyle = {
-        width: '25%',
-        textAlign: 'center',
-    };
+const InventoryContainer = () => {
+    const publisherID = 1;
 
     return (
-        <div>
-            <Title>Inventory</Title>
-            <Table
-                rowSelection={{
-                    type: selectionType,
-                    ...rowSelection,
-                }}
-                columns={columns}
-                dataSource={data}
+        <div className="inventory__container">
+            <PageHeader
+                className="inventory__page-header"
+                title="Inventory"
+                footer={
+                    <InventoryControls/>
+                }
             />
+            <div className={"inventory__container-content"}>
+                <Stock
+                    publisher={ publisherID }
+                    tableData={ data }
+                />
+            </div>
         </div>
     );
 };
 
-export default InventoryPage;
+export default InventoryContainer;
 
 

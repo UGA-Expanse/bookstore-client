@@ -18,11 +18,14 @@ import LogoutContext from "./context/LogoutContext";
 import AppContext from "./context/AppContext";
 // Custom defined containers
 import TopMost from "./containers/TopMost/Container";
-import Inventory from "./containers/Inventory/InventoryPage";
+import Inventory from "./containers/Inventory/InventoryContainer";
 import Catalog from "./containers/Catalog/CatalogPage";
-
+import SignIn from "./components/access/SignIn";
+import SignUp from "./components/access/SignUp";
 import logo from './logo.svg';
 import './App.css';
+import { VerifyEmailAddress } from "./components/VerifyEmailAddress";
+import ForgotPassword from "./components/access/ForgotPassword";
 
 // <Navigate exact from="/login" to="/catalog" />
 
@@ -40,6 +43,10 @@ function App()
                         <AppContext.Provider value={{ disableNavigation }}>
                             <TopMost>
                                 <Routes>
+                                    <Route exact path="/verify" element={<VerifyEmailAddress />} />
+                                    <Route exact path="/reset" element={<ForgotPassword />} />
+                                    <Route exact path="/signin" element={<SignIn />} />
+                                    <Route exact path="/signup" element={<SignUp />} />
                                     <Route exact path="/" element={<Catalog />} />
                                     <Route exact path="/catalog" element={<Catalog />} />
                                     <Route exact path="/inventory" element={<Inventory />} />
