@@ -1,0 +1,20 @@
+.card--badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  backgrounod-color: red;
+  padding: 5px 7px;
+  border-radius: 2px;
+  font-weight: bold;
+}
+
+.ant-card-head-title {
+  display: inline-block;
+  flex: 1 1;
+  padding: 16px 0;
+  overflow: hidden;
+  white-space: normal;
+  text-overflow: ellipsis;
+}
+
+//.ant-card-bordered { width: 260px }

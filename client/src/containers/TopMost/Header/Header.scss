@@ -1,0 +1,71 @@
+@import "../../../styles/base.scss";
+
+.header__main {
+  padding: 0;
+
+  .ant-space-item { vertical-align: middle; }
+
+  .header__contents {
+    padding-right: 16px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .logo {
+    padding-left: 50px;
+    padding-right: 80px;
+    font-weight: bold;
+    font-size: xx-large;
+  }
+
+  .search-input-wrapper {
+    min-width: 800px;
+    vertical-align: middle;
+    width: 55%;
+    margin-right:auto;
+  }
+
+  .select-after {
+    min-width: 200px;
+  }
+
+  .header-search {
+    width: 55%;
+  }
+
+
+  .header__nav {
+    min-width: 700px;
+    font-size: 16px;
+
+  }
+}
+
+
+.ant-layout-header {
+  /* background-color: #ba0c2f !important; */
+  background-color: #fff !important;
+}
+
+.header--top-row { justify-content: flex-start; }
+
+.testc {
+  flex: auto;
+  width: 220px;
+  padding: 15px 10px;
+  vertical-align: baseline;
+}
+
+
+.select-before {
+  width: 90px;
+}
+
+.select-after {
+  width: 80px;
+}
+
+.ant-layout-header {
+  height: 84px;
+}

@@ -1,6 +1,7 @@
 # Local IDE(s)
 .idea
 *~*
+.DS_Store
 
 # Logs
 logs
