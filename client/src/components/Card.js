@@ -15,12 +15,14 @@ export const Card = props => {
         <AntDCard
             title={props.title}
             bordered={true}
-            style={{ width: 160 }}
-            cover={<img alt="example" width="130" src={`images/${props.cover}`} />}
+            style={{ width: 200 }}
+            cover={<img alt="example" src={`images/${props.cover}`} />}
         >
             {badgeText && <div className="card--badge">SOLD OUT</div>}
-            <p>Card content</p>
-            <p>Card content</p>
+            <p><span aria-hidden="true"><span className="a-price-symbol">$</span><span className="a-price-whole">8<span
+                className="a-price-decimal">.</span></span><span className="a-price-fraction">99</span></span></p>
+            <p>Get it as soon as Mon, Mar 28
+                FREE Shipping by Expanse</p>
         </AntDCard>
     ); // return
 }

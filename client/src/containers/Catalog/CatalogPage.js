@@ -20,14 +20,13 @@ export const CatalogPage = props => {
     });
 
     return (
-
             <>
             <Row>
                 <Col span={24}><Carousel /></Col>
             </Row>
             <Row>
-                <Col span={18} offset={4}>
-                    <Space size={["large",4]} wrap={true}>
+                <Col span={20} offset={2}>
+                    <Space size={["large",6]} wrap={true}>
                         {cards}
                     </Space>
                 </Col>

@@ -18,9 +18,9 @@ const { Option } = Select;
 export const Header = props => {
     const onSearch = value => console.log(value);
     const selectBefore = (
-        <Select defaultValue="http://" className="select-before">
-            <Option value="http://">http://</Option>
-            <Option value="https://">https://</Option>
+        <Select defaultValue="by Title" className="select-before">
+            <Option value=".org">by Author</Option>
+            <Option value=".org">by ISBN</Option>
         </Select>
     );
 
@@ -38,6 +38,7 @@ export const Header = props => {
 
                 <Space size={"medium"}>
                     <span className="logo"><a href="/">Expanse</a></span>
+                    {selectBefore}
                     <Search className="search-input-wrapper"
                             placeholder="input search text"
                             onSearch={onSearch}

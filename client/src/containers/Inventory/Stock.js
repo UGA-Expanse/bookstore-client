@@ -36,8 +36,12 @@ const Stock = props => {
             dataIndex: 'isbn',
         },
         {
-            title: 'Publish Date',
+            title: 'Publication date',
             dataIndex: 'date',
+        },
+        {
+            title: 'Publisher',
+            dataIndex: 'publisher'
         },
         {
             title: 'Cost',

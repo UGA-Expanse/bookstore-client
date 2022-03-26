@@ -10,7 +10,7 @@ import {
     BrowserRouter as Router,
     Navigate,
     Route,
-    Routes,
+    Routes
 } from "react-router-dom";
 
 // Custom defined contexts
@@ -19,9 +19,11 @@ import AppContext from "./context/AppContext";
 // Custom defined containers
 import TopMost from "./containers/TopMost/Container";
 import Inventory from "./containers/Inventory/InventoryContainer";
-import Catalog from "./containers/Catalog/CatalogPage";
+import Catalog from "./containers/Catalog/CatalogBookDetailContainer";
 import SignIn from "./components/access/SignIn";
 import SignUp from "./components/access/SignUp";
+import MerchantViewContainer from "./containers/MerchantView/MerchantVIewContainer";
+
 import logo from './logo.svg';
 import './App.css';
 import { VerifyEmailAddress } from "./components/VerifyEmailAddress";
@@ -51,6 +53,7 @@ function App()
                                     <Route exact path="/catalog" element={<Catalog />} />
                                     <Route exact path="/inventory" element={<Inventory />} />
                                     <Route exact path="/cart" element={<Inventory />} />
+                                    <Route path="/merchant" element={ <MerchantViewContainer /> } />
                                 </Routes>
                             </TopMost>
                         </AppContext.Provider>
