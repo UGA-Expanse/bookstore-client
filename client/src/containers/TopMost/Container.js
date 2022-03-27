@@ -13,17 +13,23 @@ import { useContext } from "react";
 import AppContext from "../../context/AppContext";
 
 const mainStyle = {
-    minHeight: '85vh',
+    minHeight: '65vh',
     backgroundColor: '#FFF',
     alignItems: 'stretch',
-    display: 'flex'
+    display: 'flex',
+    direction: 'column',
+    alignContent: 'center'
 }
 const footerStyle = {
     display: 'flex',
     alignContent: 'flex-end',
-    minHeight: '100px',
+    minHeight: '200px',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    flexGrow: 1,
+    borderBbottom: "1px solid #F0F0F5",
+    color: '#FFF',
+    backgroundColor: '#232f3e',
 }
 
 export const Container = ({ children }) => {

@@ -6,8 +6,6 @@ import data from "../../tmp/inventory_data.js"
 
 const { Title } = Typography;
 
-
-
 const InventoryContainer = () => {
     const publisherID = 1;
 
