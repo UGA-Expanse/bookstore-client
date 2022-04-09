@@ -40,6 +40,10 @@ export const Header = props => {
         flexGrow: 1
     }
 
+    // const handleExpanseClick = () => {
+    //     location.href = "/";
+    // }
+
     return (
         <>
         <Layout.Header className="header__main">
