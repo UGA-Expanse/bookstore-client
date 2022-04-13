@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "license": "MIT",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/dom": "^8.11.3",
     "@testing-library/jest-dom": "^5.16.2",
