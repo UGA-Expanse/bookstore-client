@@ -2,10 +2,12 @@
 
 const Hapi = require('@hapi/hapi');
 
+var port = process.env.PORT || '4000';
+
 // Create a server with a host and port
 const server = Hapi.server({
     host: 'localhost',
-    port: 8080
+    port: port
 });
 
 // Add the route
