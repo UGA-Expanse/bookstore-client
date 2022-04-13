@@ -2,10 +2,14 @@
   "name": "expanse-bookstore-frontend",
   "version": "1.0.0",
   "private": true,
-  "license": "MIT",
+  "license": "MIT",  
+    "workspaces": ["client", "server"],  
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently --kill-others  \"cd server && yarn start\" \"cd client && yarn start\""
+      "dev": "concurrently --kill-others  \"cd server && yarn start\" \"cd client && yarn start\"",
+      "client": "yarn workspace client start",
+      "server": "yarn workspace server start",
+      "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "start": "concurrently ",
   "dependencies": {

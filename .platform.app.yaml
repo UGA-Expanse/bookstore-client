@@ -16,12 +16,19 @@ type: 'nodejs:16'
 # application container. The 'source_path' specifies the subdirectory
 # from within the source that the mount should point at. 
 
+build:
+  flavor: none
 
+dependencies:
+  nodejs:
+    yarn: "1.22.18"
 
-
-    
+hooks:
+  build: |
+    yarn
+    yarn install
 
 web:
   commands: 
 #    start: "node index.js"
-    start: "yarn run dev"
+    start: "yarn start"
