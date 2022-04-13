@@ -4,7 +4,23 @@ const Path = require('path');
 const Hapi = require('@hapi/hapi');
 const Inert = require('@hapi/inert');
 
-var port = 3001; //process.env.PORT || '4000';
+function normalizePort(val) {
+    const port = parseInt(val, 10);
+
+    if (Number.isNaN(port)) {
+	return val;
+    }
+
+    if (port >= 0) {
+	return port;
+    }
+
+    return false;
+}
+
+var port = normalizePort(process.env.PORT) || 4001;
+
+
 
 // Create a server with a host and port
 const server = Hapi.server({
@@ -53,6 +69,7 @@ async function start() {
 	});
 	
         await server.start();
+	console.log("Hapi server listening on port " + server.info.uri);
     } catch (err) {
         console.log(err);
         process.exit(1);
