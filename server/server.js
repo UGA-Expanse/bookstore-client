@@ -56,7 +56,7 @@ async function start() {
 
 	server.route({
 	    method: 'GET',
-	    path: '/app/{path*}',
+	    path: '/{path*}',
 	    handler: {
 		directory: {
 		    path: Path.join(__dirname, '../client/build/'),
