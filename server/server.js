@@ -4,7 +4,7 @@ const Path = require('path');
 const Hapi = require('@hapi/hapi');
 const Inert = require('@hapi/inert');
 
-var port = process.env.PORT || '4000';
+var port = 3001; //process.env.PORT || '4000';
 
 // Create a server with a host and port
 const server = Hapi.server({
@@ -13,6 +13,7 @@ const server = Hapi.server({
 });
 
 // Add the route
+/*
 server.route({
     method: 'GET',
     path: '/',
@@ -20,6 +21,7 @@ server.route({
         return 'hello world';
     }
 });
+*/
 /*
 server.route({
 	method: 'GET',
