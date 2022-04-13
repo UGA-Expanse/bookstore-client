@@ -27,6 +27,7 @@ hooks:
   build: |
     yarn
     yarn install
+    yarn build
 
 web:
   commands: 
