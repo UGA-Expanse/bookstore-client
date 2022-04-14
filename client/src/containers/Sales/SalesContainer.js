@@ -115,7 +115,6 @@ export const SalesContainer = () => {
         <div className="sales__container">
             <PageHeader
                 className="sales__page-header"
-                title="Sales"
                 footer={<SalesControls/>}
             />
         </div>

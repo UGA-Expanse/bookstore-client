@@ -2,6 +2,10 @@
 
 .header__main {
   padding: 0;
+  display: flex;
+  padding-top: 10px;
+
+  .logo > img { float: left; }
 
   .ant-space-item { vertical-align: middle; }
 
@@ -16,7 +20,8 @@
     padding-left: 50px;
     padding-right: 80px;
     font-weight: bold;
-    font-size: xx-large;
+    font-size: xxx-large;
+    color: #ba0c2f;
   }
 
   .search-input-wrapper {
@@ -36,11 +41,12 @@
 
 
   .header__nav {
-    min-width: 700px;
     font-size: 16px;
-
+    background-color: #F0F0F5;
   }
 }
+
+
 
 
 .ant-layout-header {
@@ -67,5 +73,19 @@
 }
 
 .ant-layout-header {
-  height: 84px;
+  height: 65px;
 }
+
+ .ant-layout-header.header__subnav  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    line-height: 2em;
+    height: 44px;
+    width:100vw !important;
+    border-bottom: 1px solid #F0F0F5;
+}
+
+ .header__subnav > ul {
+   min-width: 100px !important;
+ }

@@ -19,10 +19,12 @@ import AppContext from "./context/AppContext";
 // Custom defined containers
 import TopMost from "./containers/TopMost/Container";
 import Inventory from "./containers/Inventory/InventoryContainer";
-import Catalog from "./containers/Catalog/CatalogBookDetailContainer";
+import Catalog from "./containers/Catalog/CatalogPage";
+import CatalogD from "./containers/Catalog/CatalogBookDetailContainer";
 import SignIn from "./components/access/SignIn";
 import SignUp from "./components/access/SignUp";
 import MerchantViewContainer from "./containers/MerchantView/MerchantVIewContainer";
+import Cart from "./containers/Cart/Cart";
 
 import logo from './logo.svg';
 import './App.css';
@@ -50,9 +52,9 @@ function App()
                                     <Route exact path="/signin" element={<SignIn />} />
                                     <Route exact path="/signup" element={<SignUp />} />
                                     <Route exact path="/" element={<Catalog />} />
-                                    <Route exact path="/catalog" element={<Catalog />} />
+                                    <Route exact path="/book" element={<CatalogD />} />
                                     <Route exact path="/inventory" element={<Inventory />} />
-                                    <Route exact path="/cart" element={<Inventory />} />
+                                    <Route exact path="/cart" element={<Cart />} />
                                     <Route path="/merchant" element={ <MerchantViewContainer /> } />
                                 </Routes>
                             </TopMost>
