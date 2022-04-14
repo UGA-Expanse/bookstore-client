@@ -23,7 +23,7 @@ var port = normalizePort(process.env.PORT) || 8888;
 // Create a server with a host and port
 const server = Hapi.server({
 //    host: 'localhost',
-    port: port,
+    port: 8889,
     router: { stripTrailingSlash: true },
     routes: {
 	files: {relativeTo: Path.join(__dirname, '../client/build')},
@@ -61,7 +61,7 @@ async function start() {
 
 	server.route({
 	    method: 'GET',
-	    path: '/{param*}',
+	    path: '/app/{param*}',
 	    handler: {
 		directory: {
 		    path: '.', //Path.join(__dirname, '../client/build/'),
