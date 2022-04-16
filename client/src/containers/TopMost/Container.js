@@ -39,6 +39,9 @@ export const Container = ({ children }) => {
     const appContext = useContext(AppContext);
     const { disableNavigation, user, getUser, checkUser } = appContext;
 
+    console.log("DISABLE_NAVIGATION:", disableNavigation);
+    disableNavigation = 'Catalog';
+
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
     

@@ -1,3 +1,8 @@
+import React, { useContext, useState } from "react";
+import AppContext from "../../context/AppContext";
+import Carousel from "../../components/Carousel";
+
+
 import {
     PageHeader,
     Checkbox,
@@ -10,7 +15,18 @@ const { CheckboxGroup } = Checkbox;
 const { Title } = Typography;
 const { Option } = Select;
 
-const Cart = (props) => {
+
+export const Cart = (props) => {
+    
+    const appContext = useContext(AppContext);
+    const { disableNavigation, user, getUser, checkUser } = appContext;
+    console.log("USER: ", user);
+    console.log("DISABLE_NAVIGATION:", disableNavigation);
+    disableNavigation = 'Cart';
+
+    const [name, setName] = useState("");
+    const [picture, setPicture] = useState("");
+    
     const publisherID = 1;
     const cartItemRowStyle = {
         display: 'flex',
@@ -49,8 +65,9 @@ const Cart = (props) => {
         borderBottom: '1px solid #F0F0F0'
     };
 
-    return (
+    const view = (
         <div className="cart__container">
+            {(user?.username) ? <Carousel/> : <span/>}
             <PageHeader
                 id="cartPageHeader"
                 className="section__page-header"
@@ -130,6 +147,9 @@ const Cart = (props) => {
             </div>
         </div>
     ); // return
+
+    return view;
+
 }; // Cart
 
 export default Cart;

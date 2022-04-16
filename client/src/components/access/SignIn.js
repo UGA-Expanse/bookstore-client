@@ -26,6 +26,9 @@ export const SignIn = () => {
     const appContext = useContext(AppContext);
     const { disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
 
+    // console.log("DISABLE_NAVIGATION:", disableNavigation);
+    // disableNavigation = 'Signin';
+
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
 
