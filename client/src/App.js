@@ -16,7 +16,6 @@ import ContextConnector from "./config/connector";
 
 // Custom defined contexts
 import LogoutContext from "./context/LogoutContext";
-import AppContext from "./context/AppContext";
 // Custom defined containers
 import TopMost from "./containers/TopMost/Container";
 import Inventory from "./containers/Inventory/InventoryContainer";

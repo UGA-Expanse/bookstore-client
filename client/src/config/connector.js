@@ -42,6 +42,19 @@ const Context = props => {
   };
 
   // POST Methods
+  const checkUser = async user => {
+      var res = await axiosClient.post("/login", user).catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
+      
+      if (res?.data?.content) {
+        localStorage.setItem("user", JSON.stringify(res.data.content));
+      }
+
+    dispatch({
+      type: GET_USER,
+      payload: res?.data?.content
+    });
+  };
+
   const addUser = async user => {
     const res = await axiosClient.post("/users/add", user);
 
@@ -110,6 +123,7 @@ const Context = props => {
         addCategory,
         addProduct,
         getUser,
+        checkUser,
         getCategories,
         getProducts,
         getCurrency

@@ -1,3 +1,7 @@
+import React, { useContext, useState } from "react";
+import AppContext from "../../context/AppContext";
+
+
 import {
     Layout
 } from "antd";
@@ -5,12 +9,10 @@ import "antd/dist/antd.css";
 import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
 import "./index.css";
 
+
 import Navigation from "./Navigation/Navigation";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
-
-import { useContext } from "react";
-import AppContext from "../../context/AppContext";
 
 const mainStyle = {
     minHeight: '65vh',
@@ -32,11 +34,15 @@ const footerStyle = {
     backgroundColor: '#232f3e',
 }
 
+
 export const Container = ({ children }) => {
     const appContext = useContext(AppContext);
-    const { disableNavigation } = appContext;
+    const { disableNavigation, user, getUser, checkUser } = appContext;
 
-    return (
+    const [name, setName] = useState("");
+    const [picture, setPicture] = useState("");
+    
+    const view = (
         <Layout className={"page"}>
             <Header />
             <Layout style={mainStyle}>
@@ -49,6 +55,9 @@ export const Container = ({ children }) => {
             </Layout.Footer>
         </Layout>
     ); // return
+
+    return view;
+
 } // export TopMost
 
 export default Container;
