@@ -13,9 +13,11 @@ import {
   GET_USER,
   GET_CATEGORIES,
   GET_PRODUCTS,
+  GET_BOOKS,
   POST_USER,
   POST_CATEGORY,
-  POST_PRODUCTS
+  POST_PRODUCTS,
+  POST_BOOKS
 } from "./constants";
 
 // context
@@ -33,7 +35,7 @@ const Context = props => {
   const initialState = {
     user: null,
     currency: null,
-    products: [],
+    books: [],
     categories: [],
     hero: "dark"
   };
@@ -53,12 +55,13 @@ const Context = props => {
 
   // POST Methods
   const checkUser = async user => {
-      var res = await axiosClient.post("/login", user).catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
+      var res = await axiosClient.post("/login", user)
+                                 .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
       
       if (res?.data?.content) {
         localStorage.setItem("user", JSON.stringify(res.data.content));
       }
-
+      
     dispatch({
       type: GET_USER,
       payload: res?.data?.content
@@ -88,6 +91,14 @@ const Context = props => {
 
     dispatch({
       type: POST_PRODUCTS,
+      payload: res.data
+    });
+  };
+  const addBook = async book => {
+    const res = await axiosClient.post("/books/add", book);
+
+    dispatch({
+      type: POST_BOOKS,
       payload: res.data
     });
   };
@@ -122,6 +133,18 @@ const Context = props => {
     });
   };
 
+  const getBooks = async () => {
+    const res = await axiosClient.get("/book/all")
+    .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
+
+    console.log("res data:", JSON.stringify(res?.data));
+
+    dispatch({
+      type: GET_BOOKS,
+      payload: res?.data
+    });
+  };
+
   return (
     <userContext.Provider
       value={{
@@ -129,14 +152,17 @@ const Context = props => {
         currency: state.currency,
         categories: state.categories,
         products: state.products,
+        books: state.books,
         hero: state.hero,
         addUser,
         addCategory,
         addProduct,
+        addBook,
         getUser,
         checkUser,
         getCategories,
         getProducts,
+        getBooks,
         getCurrency
       }}
     >

@@ -5,7 +5,9 @@ import {
     POST_USER,
     POST_PRODUCTS,
     GET_USER,
-    GET_CURRENCY
+    GET_CURRENCY,
+    GET_BOOKS,
+    POST_BOOKS
   } from "./constants";
   
   export default (state, action) => {
@@ -30,6 +32,11 @@ import {
           ...state,
           products: action.payload
         };
+      case POST_BOOKS:
+        return {
+          ...state,
+          books: action.payload
+        };
       case GET_USER:
         return {
           ...state,
@@ -39,6 +46,11 @@ import {
         return {
           ...state,
           products: action.payload
+        };
+      case GET_BOOKS:
+        return {
+          ...state,
+          books: action.payload
         };
   
       case GET_CATEGORIES:
