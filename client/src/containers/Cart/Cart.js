@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import AppContext from "../../context/AppContext";
+import {Context, useUserContext} from "../../config/connector";
 import Carousel from "../../components/Carousel";
 
 
@@ -15,14 +15,12 @@ const { CheckboxGroup } = Checkbox;
 const { Title } = Typography;
 const { Option } = Select;
 
-
 export const Cart = (props) => {
     
-    const appContext = useContext(AppContext);
-    const { disableNavigation, user, getUser, checkUser } = appContext;
+    const appContext = useUserContext();
+    const { hero, disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
+    console.log("Hero:", hero);
     console.log("USER: ", user);
-    console.log("DISABLE_NAVIGATION:", disableNavigation);
-    disableNavigation = 'Cart';
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");

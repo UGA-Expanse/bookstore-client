@@ -12,7 +12,7 @@ import {
     Route,
     Routes
 } from "react-router-dom";
-import ContextConnector from "./config/connector";
+import {Context as ContextConnector} from "./config/connector";
 
 // Custom defined contexts
 import LogoutContext from "./context/LogoutContext";

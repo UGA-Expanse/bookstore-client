@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import AppContext from "../../../context/AppContext";
+import {Context, useUserContext} from "../../../config/connector";
+
 import { Link } from "react-router-dom";
 
 
@@ -22,8 +23,8 @@ const menuStyle = {
 
 
 export const Navigation = () => {
-    const appContext = useContext(AppContext);
-    const { disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
+    const userContext = useUserContext();
+    const { disableNavigation, user, getUser, checkUser, isLoggedOut } = userContext;
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");

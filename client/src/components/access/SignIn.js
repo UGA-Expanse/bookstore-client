@@ -1,8 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 
-
-import AppContext from "../../context/AppContext";
+import {Context, useUserContext} from "../../config/connector";
 
 
 import {
@@ -23,12 +22,10 @@ const signInStyle = {
 
 
 export const SignIn = () => {
-    const appContext = useContext(AppContext);
-    const { disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
 
-    // console.log("DISABLE_NAVIGATION:", disableNavigation);
-    // disableNavigation = 'Signin';
-
+    const appContext = useUserContext();
+    const { hero, disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
+    console.log("Hero:", hero);
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
 
@@ -52,7 +49,7 @@ export const SignIn = () => {
     };
 
     const onFinishFailed = (errorInfo) => {
-        console.log('adfasdfasdfasFailed:', errorInfo);
+        console.log('Input validation failed:', errorInfo);
     };
 
     console.log("rendering", JSON.stringify(user));

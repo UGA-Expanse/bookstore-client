@@ -1,10 +1,8 @@
 import React, { useReducer } from "react";
+import { createContext } from "react";
 
 import axiosClient from "./axios";
 import currencyClient from "./apiCurrency";
-
-// context
-import userContext from "../context/AppContext";
 
 // reducer
 import Reducer from "./reducer";
@@ -20,12 +18,24 @@ import {
   POST_PRODUCTS
 } from "./constants";
 
+// context
+const userContext = React.createContext();
+
+function useUserContext() {
+  const context = React.useContext(userContext);
+  if (context === undefined) {
+    throw new Error('userContext must be used within a UserContextProvider')
+  }
+  return context
+}
+
 const Context = props => {
   const initialState = {
     user: null,
     currency: null,
     products: [],
-    categories: []
+    categories: [],
+    hero: "dark"
   };
 
   // Dispatch to execute actions
@@ -119,6 +129,7 @@ const Context = props => {
         currency: state.currency,
         categories: state.categories,
         products: state.products,
+        hero: state.hero,
         addUser,
         addCategory,
         addProduct,
@@ -134,4 +145,7 @@ const Context = props => {
   );
 };
 
-export default Context;
+export {
+  Context, 
+  useUserContext
+};

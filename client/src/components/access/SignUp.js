@@ -1,3 +1,7 @@
+import React, { useContext, useState } from "react";
+import {Context, useUserContext} from "../../config/connector";
+
+
 import {
     Form,
     Input,
@@ -17,6 +21,11 @@ const signUpStyle = {
 }
 
 export const SignUp = () => {
+    const appContext = useUserContext();
+    const { hero, disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
+    console.log("Hero:", hero);
+    console.log("USER: ", user);
+    
     const onFinish = (values) => {
         console.log('Success:', values);
     };
