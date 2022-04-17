@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import {Context, useUserContext} from "../../config/connector";
+import { Navigate } from "react-router-dom";
 
 
 import {
@@ -38,24 +39,32 @@ const footerStyle = {
 export const Container = ({ children }) => {
 
     const appContext = useUserContext();
-    const { disableNavigation, user, getUser, checkUser } = appContext;
+    const { disableNavigation, user, getUser, checkUser, path } = appContext;
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
-    
-    const view = (
-        <Layout className={"page"}>
-            <Header />
-            <Layout style={mainStyle}>
-                <Layout.Content>
-                    { children }
-                </Layout.Content>
+
+    let page;
+
+    console.log("Path: ", path);
+    const view = (path != page) ? (
+        <Navigate to="path.selected" />
+        ) : (
+            <Layout className={"page"}>
+                <Header />
+                <Layout style={mainStyle}>
+                    <Layout.Content>
+                        { children }
+                    </Layout.Content>
+                </Layout>
+                <Layout.Footer style={footerStyle}>
+                    <Footer/>
+                </Layout.Footer>
             </Layout>
-            <Layout.Footer style={footerStyle}>
-                <Footer/>
-            </Layout.Footer>
-        </Layout>
-    ); // return
+        ); // return
+
+    // set page variable
+    page = path
 
     return view;
 

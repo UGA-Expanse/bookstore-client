@@ -47,6 +47,7 @@ export const Navigation = () => {
             "horizontal"
             className="header__nav"
             style={menuStyle}
+            disabledOverflow={true}
             onClick={handleClick}>
                 <Menu.Item key="account">Account</Menu.Item>
                 <Menu.Item key="signoff">Sign Off</Menu.Item>
@@ -59,6 +60,7 @@ export const Navigation = () => {
             selectedKeys={[path]}    
             className="header__nav"
             style={menuStyle}
+            disabledOverflow={true}
             onClick={handleClick}>
                 <Menu.Item key="signup"><SignUp /></Menu.Item>
                 <Menu.Item key="signin"><SignIn /></Menu.Item>

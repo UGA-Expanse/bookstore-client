@@ -15,10 +15,16 @@
   overflow: hidden;
   white-space: normal;
   text-overflow: ellipsis;
+  font-size: larger;
+  line-height: 1.20em;
 }
 
 img.ant-card-cover {
   width: inherit !important;
+}
+
+.ant-card-head {
+  min-height: 100px !important;
 }
 
 //.ant-card-bordered { width: 260px }

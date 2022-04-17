@@ -11,3 +11,6 @@ export const GET_USER = "GET_USER";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_BOOKS = "GET_BOOKS";
+
+// Constant vars
+export const SET_PATH = "SET_PATH";

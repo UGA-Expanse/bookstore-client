@@ -11,7 +11,13 @@ import {
 
 import Card from "../../components/Card";
 import Carousel from "../../components/Carousel";
-// import data from "../../tmp/data";
+
+import "./Catalog.css";
+
+const mainStyle = {
+    alignItems: 'flex-end !important'
+}
+
 
 export const CatalogPage = props => {
 
@@ -25,8 +31,6 @@ export const CatalogPage = props => {
     useEffect(() => {
         getBooks();
     }, []);
-
-    console.log("Books:", books);
 
     const cards = books.map(book => {
         return (
@@ -44,7 +48,7 @@ export const CatalogPage = props => {
             </Row>
             <Row>
                 <Col span={20} offset={2}>
-                    <Space size={["large",6]} wrap={true}>
+                    <Space style={mainStyle} size={["large",6]} align="end" wrap={true}>
                         {cards}
                     </Space>
                 </Col>

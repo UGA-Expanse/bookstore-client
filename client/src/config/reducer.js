@@ -7,7 +7,8 @@ import {
     GET_USER,
     GET_CURRENCY,
     GET_BOOKS,
-    POST_BOOKS
+    POST_BOOKS,
+    SET_PATH
   } from "./constants";
   
   export default (state, action) => {
@@ -58,6 +59,11 @@ import {
           ...state,
           categories: action.payload
         };
+        case SET_PATH:
+          return {
+            ...state,
+            path: action.payload
+          };
   
       default:
         return state;

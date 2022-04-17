@@ -1,3 +1,5 @@
+import Picture from "../components/Picture"
+
 import {
     Card as AntDCard
 } from "antd";
@@ -5,18 +7,21 @@ import {
 import "./Card.scss";
 
 export const Card = props => {
+    
     const { Meta } = AntDCard;
     let badgeText;
     if (props.quantity === 0) {
         badgeText = "";
     } // if
 
+    const titleSuffix = (props.title.length > 50) ? "\u2026" : "";
+
     return (
         <AntDCard
-            title={props.title.substring(0,100)}
+            title={props.title.substring(0,50) + titleSuffix}
             bordered={true}
             style={{ width: 200 }}
-            cover={<img alt="example" src={`https://covers.openlibrary.org/b/isbn/${props.isbn13}-M.jpg`} />}
+            cover={<Picture img={`https://covers.openlibrary.org/b/isbn/${props.isbn13}-M.jpg?default=true`} />}
         >
             {badgeText && <div className="card--badge">SOLD OUT</div>}
             <p><span aria-hidden="true"><span className="a-price-symbol">$</span><span className="a-price-whole">8<span

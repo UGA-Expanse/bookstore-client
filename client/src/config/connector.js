@@ -17,7 +17,8 @@ import {
   POST_USER,
   POST_CATEGORY,
   POST_PRODUCTS,
-  POST_BOOKS
+  POST_BOOKS,
+  SET_PATH
 } from "./constants";
 
 // context
@@ -37,7 +38,7 @@ const Context = props => {
     currency: null,
     books: [],
     categories: [],
-    hero: "dark"
+    path: null
   };
 
   // Dispatch to execute actions
@@ -153,7 +154,7 @@ const Context = props => {
         categories: state.categories,
         products: state.products,
         books: state.books,
-        hero: state.hero,
+        path: state.path,
         addUser,
         addCategory,
         addProduct,
