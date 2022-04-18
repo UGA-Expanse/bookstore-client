@@ -1,3 +1,7 @@
+import React, { useContext, useState } from "react";
+import {Context, useUserContext} from "../../../config/connector";
+import { useNavigate } from 'react-router';
+
 import {
     Layout,
     Input,
@@ -17,19 +21,33 @@ const { Search, Button } = Input;
 const { Option } = Select;
 
 export const Header = props => {
-    const onSearch = value => console.log(value);
+    let navigate = useNavigate();
+    const userContext = useUserContext();
+    const { disableNavigation, user, getUser, checkUser, isLoggedOut, getBooks, getCategories } = userContext;
+
+    const onSearch = value => {
+        let searchPath = `/search?category=${searchSelectedCategory}&term=${value}`;
+        navigate(searchPath );
+    };
+
+    let searchSelectedCategory = "books";
+    const handleCategorySelect = (value) => {
+        searchSelectedCategory = value;
+    }
+
     const selectBefore = (
-        <Select defaultValue=".com" className="select-after">
-            <Option value=".com">Books</Option>
-            <Option value=".jp">Textbooks</Option>
-            <Option value=".cn">Magazines</Option>
-            <Option value=".org">Comics & Graphic Novels</Option>
+        <Select defaultValue="books" className="select-after" onSelect={handleCategorySelect}>
+            <Option value="books">Books</Option>
+            <Option value="textbooks">Textbooks</Option>
+            <Option value="magazines">Magazines</Option>
+            <Option value="comic">Comics & Graphic Novels</Option>
         </Select>
     );
 
     const headerLogoContainerStyle = {
         minWidth: "200px",
-        width: "300px"
+        width: "300px",
+        cursor: "pointer"
     };
 
     const headerMainContainerStyle = {
@@ -40,17 +58,21 @@ export const Header = props => {
         flexGrow: 1
     }
 
-    // const handleExpanseClick = () => {
-    //     location.href = "/";
-    // }
+    const handleExpanseLogoClick = () => {
+        navigate("/");
+    }
 
-    return (
+    const view = (
         <>
         <Layout.Header className="header__main">
-            <div style={headerLogoContainerStyle} className={"header__logo-container"}>
+
+            <div style={headerLogoContainerStyle} className={"header__logo-container"} 
+                    onClick={handleExpanseLogoClick}>
                 <span className="logo">expanse</span>
             </div>
+
             <div style={headerMainContainerStyle} className={"header__main-container"}>
+
                 <Search className="search-input-wrapper"
                         placeholder="input search text"
                         onSearch={onSearch}
@@ -66,6 +88,8 @@ export const Header = props => {
             <Layout.Header className="header__subnav"><SubNavigation/></Layout.Header>
 </>
     ); // return
+
+    return view;
 } // export Header
 
 export default Header;
