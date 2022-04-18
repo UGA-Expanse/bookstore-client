@@ -25,12 +25,14 @@ export const SignIn = () => {
 
     const appContext = useUserContext();
     const { hero, disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
-    console.log("Hero:", hero);
+
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
 
     const handleChange1 = (e, value ) => setName({ value });
     const handleChange2 = (e, { value }) => setPicture({ value });
+
+    let alertMessage = '';
 
     const onFinish = (values) => {
         const username = values.username

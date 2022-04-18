@@ -1,7 +1,9 @@
 import { createContext } from "react";
 
 const AppContext = createContext({
-    disableNavigation: undefined
+    disableNavigation: true,
+    isLoggedOut: undefined
+
 });
 
 export default AppContext;

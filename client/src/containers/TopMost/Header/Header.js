@@ -30,7 +30,7 @@ export const Header = props => {
         navigate(searchPath );
     };
 
-    let searchSelectedCategory = "books";
+    let searchSelectedCategory = "books ";
     const handleCategorySelect = (value) => {
         searchSelectedCategory = value;
     }

@@ -144,14 +144,17 @@ const Context = props => {
   };
 
   const getBooks = async (props) => {
-    const section = (props && props != 'books') ? `${props}` : "";
-    const path = `/book${section}/all`
+    const [section, search] = props;
+    const queryString = (section == "search" && search)? search : '';
+    const _section = (section && section != '/books') ? `${section}` : "";
+    
+    const path = `/book${_section}/all${queryString}`
     console.log("Path: ", path);
     const res = await axiosClient.get(path)
                 .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
 
-    if (res.data) {
-      console.log("res data:", JSON.stringify(res?.data));
+    // if (res.data) {
+      console.log("res data:-------------------", JSON.stringify(res?.data));
       dispatch({
         type: GET_BOOKS,
         payload: res?.data
@@ -159,9 +162,9 @@ const Context = props => {
 
       dispatch({
         type: SET_PATH,
-        payload: props
+        payload: section
       });
-    } 
+    // } 
   };
 
   return (
