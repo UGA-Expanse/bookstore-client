@@ -47,7 +47,9 @@ function App(){
                         {/* <AppContext.Provider value={{ disableNavigation }}> */}
                             <TopMost>
                                 <Routes>
-                                    <Route exact path="/" element={<Catalog />} />
+                                    <Route exact path="/" element={<Catalog section="books" />} />
+                                    <Route exact path="/category/new-releases" element={<Catalog section="newrel" />} />
+                                    <Route exact path="/category/foreign" element={<Catalog section="/category/foreign" />} />
                                     <Route exact path="/verify" element={<VerifyEmailAddress />} />
                                     <Route exact path="/reset" element={<ForgotPassword />} />
                                     <Route exact path="/signin" element={<SignIn />} />

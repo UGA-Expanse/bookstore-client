@@ -117,14 +117,23 @@ const Context = props => {
       payload: res.data
     });
   };
-  const getCategories = async () => {
-    const res = await axiosClient.get("/categories/all");
 
+  // Predefined collections
+  const getCategories = async (props) => {
+
+    const path = "/category/" + props + "/all";
+    console.log("path: ", path);
+    const res = await axiosClient.get(path)
+                .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
+
+    console.log("res data:", JSON.stringify(res?.data));
+    
     dispatch({
       type: GET_CATEGORIES,
-      payload: res.data
+      payload: res?.data
     });
   };
+
   const getProducts = async () => {
     const res = await axiosClient.get("/products/all");
 
@@ -134,16 +143,25 @@ const Context = props => {
     });
   };
 
-  const getBooks = async () => {
-    const res = await axiosClient.get("/book/all")
-    .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
+  const getBooks = async (props) => {
+    const section = (props && props != 'books') ? `${props}` : "";
+    const path = `/book${section}/all`
+    console.log("Path: ", path);
+    const res = await axiosClient.get(path)
+                .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
 
-    console.log("res data:", JSON.stringify(res?.data));
+    if (res.data) {
+      console.log("res data:", JSON.stringify(res?.data));
+      dispatch({
+        type: GET_BOOKS,
+        payload: res?.data
+      });
 
-    dispatch({
-      type: GET_BOOKS,
-      payload: res?.data
-    });
+      dispatch({
+        type: SET_PATH,
+        payload: props
+      });
+    } 
   };
 
   return (

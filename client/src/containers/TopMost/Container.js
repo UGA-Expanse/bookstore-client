@@ -37,19 +37,14 @@ const footerStyle = {
 
 
 export const Container = ({ children }) => {
-
+    console.log("Container.js...");
     const appContext = useUserContext();
     const { disableNavigation, user, getUser, checkUser, path } = appContext;
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
 
-    let page;
-
-    console.log("Path: ", path);
-    const view = (path != page) ? (
-        <Navigate to="path.selected" />
-        ) : (
+    const view = (
             <Layout className={"page"}>
                 <Header />
                 <Layout style={mainStyle}>
@@ -62,9 +57,6 @@ export const Container = ({ children }) => {
                 </Layout.Footer>
             </Layout>
         ); // return
-
-    // set page variable
-    page = path
 
     return view;
 

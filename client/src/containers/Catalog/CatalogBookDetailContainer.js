@@ -10,7 +10,7 @@ import BackToResults from "../../components/links/BackToResults";
 import Carousel from "../../components/Carousel";
 import data from "../../tmp/data_manga";
 
-export const CatalogBookDetailsContainer = props => {
+export const CatalogBookDetailContainer = props => {
     const cards = data.map(item => {
         return (
             <Card
@@ -37,6 +37,7 @@ export const CatalogBookDetailsContainer = props => {
     const contentItemStyle = {
         flexGrow: 1
     }
+    
 
     return (
             <>
@@ -83,4 +84,4 @@ export const CatalogBookDetailsContainer = props => {
     ); // return
 } // export
 
-export default CatalogBookDetailsContainer;
+export default CatalogBookDetailContainer;

@@ -14,7 +14,7 @@ const menuStyle = {
 
 export const SubNavigation = () => {
     const userContext = useUserContext();
-    const { disableNavigation, user, getUser, checkUser, isLoggedOut } = userContext;
+    const { disableNavigation, user, getUser, checkUser, isLoggedOut, getBooks, getCategories } = userContext;
 
     let navigate = useNavigate();
 
@@ -28,7 +28,7 @@ export const SubNavigation = () => {
                 navigate('/');
                 break;
             case "newreleases" :
-                navigate('/category/new-release');
+                navigate('/category/new-releases');
                 break;
             case "textbooks" :
                 navigate('/category/textbooks');
@@ -38,6 +38,9 @@ export const SubNavigation = () => {
                 break;
             case "comics" :
                 navigate("/category/comics");
+                break;
+            case "foreign" :
+                navigate("/category/foreign");
                 break;
             default:
                 break;
@@ -55,8 +58,8 @@ export const SubNavigation = () => {
             <Menu.Item key="books">Books</Menu.Item>
             <Menu.Item key="newreleases">New Releases</Menu.Item>
             <Menu.Item key="textbooks">Textbooks</Menu.Item>
-            <Menu.Item key="magazines">Magazines</Menu.Item>
             <Menu.Item key="comics">Comics & Graphic Novels</Menu.Item>
+            <Menu.Item key="foreign">Foreign Books</Menu.Item>
         </Menu>
     ); // return
 
