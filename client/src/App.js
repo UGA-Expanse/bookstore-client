@@ -38,7 +38,7 @@ function App(){
     const queryClient = new QueryClient();
     const [isLoggedOut, setIsLoggedOut] = useState( true );
     const [disableNavigation, setDisableNavigation] = useState( false );
-
+    
 
     // if (isLoggedOut) {
     return (

@@ -20,12 +20,24 @@ export const SubNavigation = () => {
 
     const path = "home";
     const [ activeItem, setActiveItem ] = useState(path);
+    const controller = (target) => {
+        const [section, search, locationKey, path] = target;
+        getBooks(target);
+        navigate(path);
+    }
 
     const handleClick = ( e ) => {
         console.log("e.click", e.key);
+        let target, section, searchQuery, locationKey, pathVar;
+
         switch (e.key) {
             case "books" :
-                navigate('/');
+                section = '/books';
+                searchQuery = ``;
+                locationKey = "home";
+                pathVar = "/";
+                target = [section, searchQuery, locationKey, pathVar];
+                controller(target);
                 break;
             case "newreleases" :
                 navigate('/category/new-releases');
@@ -40,7 +52,12 @@ export const SubNavigation = () => {
                 navigate("/category/comics");
                 break;
             case "foreign" :
-                navigate("/category/foreign");
+                section = '/category/foreign';
+                searchQuery = '';
+                locationKey = "foreign";
+                pathVar = "/category/foreign";
+                target = [section, searchQuery, locationKey, pathVar];
+                controller(target);
                 break;
             default:
                 break;

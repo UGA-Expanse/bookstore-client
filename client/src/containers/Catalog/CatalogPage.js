@@ -48,13 +48,13 @@ export const CatalogPage = props => {
     const localPath = path;
     console.log("oldKey vs currentkey", locationKey, location.key);
     console.log(`path (${path}) vs props.section (${section})`);
-    if (locationKey != location.key) {// || section == "/search") { //} && path != props.section && books?.length != 0)) {
-        // useEffect(() => {
-            getBooks([section, search, location.key]);
-        //   }, [path]);
-    } else {
-        console.log("Skipping data load");
-    }
+    // if (locationKey != location.key) {// || section == "/search") { //} && path != props.section && books?.length != 0)) {
+    //     // useEffect(() => {
+    //         getBooks([section, search, location.key]);
+    //     //   }, [path]);
+    // } else {
+    //     console.log("Skipping data load");
+    // }
 
     console.log("after getBooks, but before render: books.length", books?.length);
 

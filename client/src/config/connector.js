@@ -146,6 +146,7 @@ const Context = props => {
   };
 
   const getBooks = async (props) => {
+
     const [section, search, locationKey] = props;
     console.log("section: ", section, "search:", search, "locationKey:", locationKey);
 
@@ -157,11 +158,10 @@ const Context = props => {
     const res = await axiosClient.get(path)
                 .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
 
-    console.log("path:", path, "section", _section);  
-       
+    console.log("data loaded!!! path:", path, "section", _section);  
+    console.log("res", JSON.stringify(res))
 
     if (res?.data) {
-      console.log("res data:-------------------", JSON.stringify(res?.data));
       dispatch({
         type: GET_BOOKS,
         payload: res?.data

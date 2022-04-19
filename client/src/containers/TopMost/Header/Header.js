@@ -21,16 +21,29 @@ const { Search, Button } = Input;
 const { Option } = Select;
 
 export const Header = props => {
+
     let navigate = useNavigate();
     const userContext = useUserContext();
-    const { disableNavigation, user, getUser, checkUser, isLoggedOut, getBooks, getCategories } = userContext;
+    const { disableNavigation, user, getUser, books, checkUser, isLoggedOut, getBooks, getCategories } = userContext;
 
+    let booksCopy;
+    var activeNavigation;
     const onSearch = value => {
-        let searchPath = `/search?criteria=${searchSelectedCriteria}&term=${value}`;
-        navigate(searchPath );
+        let searchQuery = `?criteria=${searchSelectedCriteria}&term=${value}`;
+        // navigate(searchPath );
+        const section = "/search";
+        const target = [section, searchQuery, "search", section+searchQuery];
+        controller(target);
     };
 
-    let searchSelectedCriteria = "books ";
+    console.log("evaluationg books..............", books != booksCopy, activeNavigation);
+    if (books != booksCopy && activeNavigation) {
+        console.log("eval... 2");
+        console.log("eval navigating....");
+        // navigate(activeNavigation);
+    }
+
+    let searchSelectedCriteria = "books";
     const handleCategorySelect = (value) => {
         searchSelectedCriteria = value;
     }
@@ -43,6 +56,23 @@ export const Header = props => {
             <Option value="by_year">by Year</Option>
         </Select>
     );
+
+    const controller = (target) => {
+        const [section, search, locationKey, path] = target;
+        console.log("eval ontroller.....");
+
+        // if (locationKey != location.key) {// || section == "/search") { //} && path != props.section && books?.length != 0)) {
+            // useEffect(() => {
+                booksCopy = books;
+                getBooks(target);
+                navigate(path)
+            //   }, [path]);
+        // } else {
+        //     console.log("Skipping data load");
+        // }
+
+    }
+  
 
     const headerLogoContainerStyle = {
         minWidth: "200px",
@@ -59,7 +89,10 @@ export const Header = props => {
     }
 
     const handleExpanseLogoClick = () => {
-        navigate("/");
+        console.log("eval handle.......");
+    
+        const target = ["/books", "", "mainwin", "/"];
+        controller(target);
     }
 
     const view = (
