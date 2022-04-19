@@ -27,10 +27,12 @@ export const CatalogPage = props => {
     let location = useLocation();
 
     const appContext = useUserContext();
-    const { user, path, books, getBooks, getCategories } = appContext;
+    const { user, path, books, getBooks, getCategories, locationKey } = appContext;
 
     const search = location.search;
     const section = props.section;
+
+    console.log("query:", search);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [cardsPerPage, setCardsPerPage] = useState(6);
@@ -43,15 +45,20 @@ export const CatalogPage = props => {
             />
         ); // return
     });
-
+    const localPath = path;
+    console.log("oldKey vs currentkey", locationKey, location.key);
     console.log(`path (${path}) vs props.section (${section})`);
-    if (path != props.section) {
-        getBooks([section, search]);
+    if (locationKey != location.key) {// || section == "/search") { //} && path != props.section && books?.length != 0)) {
+        // useEffect(() => {
+            getBooks([section, search, location.key]);
+        //   }, [path]);
     } else {
         console.log("Skipping data load");
     }
 
-    const view = (path) ? 
+    console.log("after getBooks, but before render: books.length", books?.length);
+
+    const view = (books?.length) ? 
         (
             <>
                 <Row>
@@ -65,8 +72,9 @@ export const CatalogPage = props => {
                         </Col>
                 </Row>
             </>
-        ) : <> </>; // return
+        ) : <> No Data available</>; // return
         
+        console.log("after getBooks, just before render");
 
     return view;
 

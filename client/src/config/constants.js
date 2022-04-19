@@ -14,3 +14,4 @@ export const GET_BOOKS = "GET_BOOKS";
 
 // Constant vars
 export const SET_PATH = "SET_PATH";
+export const SET_LOCATION = "SET_LOCATION";

@@ -18,7 +18,8 @@ import {
   POST_CATEGORY,
   POST_PRODUCTS,
   POST_BOOKS,
-  SET_PATH
+  SET_PATH,
+  SET_LOCATION
 } from "./constants";
 
 // context
@@ -38,7 +39,8 @@ const Context = props => {
     currency: null,
     books: [],
     categories: [],
-    path: null
+    path: null,
+    location: null
   };
 
   // Dispatch to execute actions
@@ -144,16 +146,21 @@ const Context = props => {
   };
 
   const getBooks = async (props) => {
-    const [section, search] = props;
-    const queryString = (section == "search" && search)? search : '';
+    const [section, search, locationKey] = props;
+    console.log("section: ", section, "search:", search, "locationKey:", locationKey);
+
+    const suffix = (section == "/search" && search)? search : '/all';
     const _section = (section && section != '/books') ? `${section}` : "";
     
-    const path = `/book${_section}/all${queryString}`
+    const path = `/book${_section}${suffix}`
     console.log("Path: ", path);
     const res = await axiosClient.get(path)
                 .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
 
-    // if (res.data) {
+    console.log("path:", path, "section", _section);  
+       
+
+    if (res?.data) {
       console.log("res data:-------------------", JSON.stringify(res?.data));
       dispatch({
         type: GET_BOOKS,
@@ -164,7 +171,12 @@ const Context = props => {
         type: SET_PATH,
         payload: section
       });
-    // } 
+
+      dispatch({
+        type: SET_LOCATION,
+        payload: locationKey
+      });
+    } 
   };
 
   return (
@@ -176,6 +188,7 @@ const Context = props => {
         products: state.products,
         books: state.books,
         path: state.path,
+        locationKey: state.locationKey,
         addUser,
         addCategory,
         addProduct,

@@ -26,21 +26,21 @@ export const Header = props => {
     const { disableNavigation, user, getUser, checkUser, isLoggedOut, getBooks, getCategories } = userContext;
 
     const onSearch = value => {
-        let searchPath = `/search?category=${searchSelectedCategory}&term=${value}`;
+        let searchPath = `/search?criteria=${searchSelectedCriteria}&term=${value}`;
         navigate(searchPath );
     };
 
-    let searchSelectedCategory = "books ";
+    let searchSelectedCriteria = "books ";
     const handleCategorySelect = (value) => {
-        searchSelectedCategory = value;
+        searchSelectedCriteria = value;
     }
 
     const selectBefore = (
         <Select defaultValue="books" className="select-after" onSelect={handleCategorySelect}>
             <Option value="books">Books</Option>
-            <Option value="textbooks">Textbooks</Option>
-            <Option value="magazines">Magazines</Option>
-            <Option value="comic">Comics & Graphic Novels</Option>
+            <Option value="by_author">Authors</Option>
+            <Option value="by_publisher">Publisher</Option>
+            <Option value="by_year">by Year</Option>
         </Select>
     );
 

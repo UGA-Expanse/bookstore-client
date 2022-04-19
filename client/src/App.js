@@ -30,6 +30,7 @@ import logo from './logo.svg';
 import './App.css';
 import { VerifyEmailAddress } from "./components/VerifyEmailAddress";
 import ForgotPassword from "./components/access/ForgotPassword";
+import axios from "axios";
 
 // <Navigate exact from="/login" to="/catalog" />
 
@@ -37,6 +38,7 @@ function App(){
     const queryClient = new QueryClient();
     const [isLoggedOut, setIsLoggedOut] = useState( true );
     const [disableNavigation, setDisableNavigation] = useState( false );
+
 
     // if (isLoggedOut) {
     return (
