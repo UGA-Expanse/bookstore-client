@@ -1,3 +1,9 @@
+import React, { useContext, useState, useEffect } from "react";
+import { useNavigate, useLocation } from 'react-router';
+import {Context, useUserContext} from "../../config/connector";
+
+import logo from "../../logo.svg";
+
 import {
     Col,
     Row,
@@ -9,16 +15,23 @@ import Card from "../../components/Card";
 import BackToResults from "../../components/links/BackToResults";
 import Carousel from "../../components/Carousel";
 import data from "../../tmp/data_manga";
+import Picture from "../../components/Picture";
+import BookDescriptor from "../../components/BookDescriptor";
 
 export const CatalogBookDetailContainer = props => {
-    const cards = data.map(item => {
-        return (
-            <Card
-                key={item.id}
-                {...item}
-            />
-        ); // return
-    });
+
+    const appContext = useUserContext();
+    const { user, path, books, getBooks, getCategories, locationKey } = appContext;
+
+    console.log("books:", JSON.stringify(books));
+
+    let navigate = useNavigate();
+    let location = useLocation();
+
+    React.useEffect(() => {
+        console.log("RUNNING USEEFFECT", location.pathname);
+        getBooks([`${location.pathname}`, "", ""])
+    }, []);
 
     const containerStyle = {
         display: "flex",
@@ -37,9 +50,13 @@ export const CatalogBookDetailContainer = props => {
     const contentItemStyle = {
         flexGrow: 1
     }
-    
 
-    return (
+    const contentBlockStyle = {
+        marginTop: "30px"
+    }
+
+
+    const view = (books != undefined && books.id) ? (
             <>
                 <Row>
                     <BackToResults />
@@ -47,41 +64,41 @@ export const CatalogBookDetailContainer = props => {
                 <Row>
                     <Col span={20} offset={2} style={containerStyle}>
                         <div style={rightItemStyle}>
-                            <img alt="example" src="images/biggon.jpg" />
+                            <Picture dim="L" img={`https://covers.openlibrary.org/b/isbn/${books.isbn13}-L.jpg?default=false`} />
                         </div>
                         <div style={contentItemStyle}>
                             <h1 id={"title"}>
-                                <span id={"productTitle"}>Hunter x Hunter, Vol. 1 Paperback – April 5, 2005</span>
+                                <span id={"productTitle"}>{books.title}</span>
                             </h1>
                             <div id="bylineInfo">
                                 <span> by </span>
-                                <span>Yoshihiro Togashi (Author)</span>
+                                <span>{books.publisher.publisherName}</span>
                             </div>
-                            <div id="content">
-
-                        <p>
-                        Plucky Gon’s quest to find his dad leads him into a whole world of crazy adventure.
-                        </p><p>
-                        Hunters are a special breed, dedicated to tracking down treasures, magical beasts, and even other people. But such pursuits require a license, and less than one in a hundred thousand can pass the grueling qualification exam. Those who do pass gain access to restricted areas, amazing stores of information, and the right to call themselves Hunters.
-                        </p><p>
-                        Gon might be a country boy, but he has high aspirations. Despite his Aunt Mito's protests, Gon decides to follow in his father's footsteps and become a legendary Hunter. The Hunter hopefuls begin their journey by storm-tossed ship, where Gon meets Leorio and Kurapika, the only other applicants who aren't devastated by bouts of seasickness.
-                        </p><p>
-                        Having survived the terrors of the high seas, Gon and his companions now have to prove their worth in a variety of tests in order to find the elusive Exam Hall. And once they get there, will they ever leave alive...?
-                        </p></div>
-                    </div>
-                    <div style={leftItemStyle}>
-                        <Button type="primary">
-                            Add to Cart
-                        </Button>
-                    </div>
+                            <div id="content" style={contentBlockStyle}>
+                                <BookDescriptor title={books.title} />
+                            </div>
+                            <div>
+                                 <h3>Book details</h3>
+                                <span class="rowHeader">Publisher ‏ : ‎ {`${books.publisher.publisherName} (${books.publicationDate})`}</span><br/>
+                                <span class="rowHeader">Language ‏ : ‎ {books.language.languageName}</span><br/>
+                                <span class="rowHeader">Pages ‏ : ‎ {`${books.numPages} pages`}</span><br/>
+                            <span class="rowHeader">ISBN-13 ‏ : ‎ {books.isbn13}</span>
+                            </div>
+                        </div>
+                        <div style={leftItemStyle}>
+                            <Button type="primary">
+                                Add to Cart
+                            </Button>
+                        </div>
                 </Col>
             </Row>
 
-
-
             </>
 
-    ); // return
+    ) : (<></>); // return
+
+    return view;
+
 } // export
 
 export default CatalogBookDetailContainer;

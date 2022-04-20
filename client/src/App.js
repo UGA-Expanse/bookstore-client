@@ -12,6 +12,7 @@ import {
     Route,
     Routes
 } from "react-router-dom";
+
 import {Context as ContextConnector} from "./config/connector";
 
 // Custom defined contexts
@@ -20,7 +21,7 @@ import LogoutContext from "./context/LogoutContext";
 import TopMost from "./containers/TopMost/Container";
 import Inventory from "./containers/Inventory/InventoryContainer";
 import Catalog from "./containers/Catalog/CatalogPage";
-import CatalogD from "./containers/Catalog/CatalogBookDetailContainer";
+import BookDetail from "./containers/Catalog/CatalogBookDetailContainer";
 import SignIn from "./components/access/SignIn";
 import SignUp from "./components/access/SignUp";
 import MerchantViewContainer from "./containers/MerchantView/MerchantVIewContainer";
@@ -38,6 +39,12 @@ function App(){
     const queryClient = new QueryClient();
     const [isLoggedOut, setIsLoggedOut] = useState( true );
     const [disableNavigation, setDisableNavigation] = useState( false );
+    // const match = useRouteMatch({
+    //     path: "/bd/isbn13/:id/",
+    //     strict: true,
+    //     sensitive: true
+    //   });
+      
     
 
     // if (isLoggedOut) {
@@ -56,11 +63,11 @@ function App(){
                                     <Route exact path="/reset" element={<ForgotPassword />} />
                                     <Route exact path="/signin" element={<SignIn />} />
                                     <Route exact path="/signup" element={<SignUp />} />
-                                    <Route exact path="/book" element={<CatalogD />} />
                                     <Route exact path="/inventory" element={<Inventory />} />
                                     <Route exact path="/cart" element={<Cart />} />
                                     <Route exact path="/search" element={<Catalog section="/search" />} />
                                     <Route path="/merchant" element={ <MerchantViewContainer /> } />
+                                    <Route path="/bd/isbn/:isbn13" element={<BookDetail />} />
                                 </Routes>
                             </TopMost>
                         {/* </AppContext.Provider> */}

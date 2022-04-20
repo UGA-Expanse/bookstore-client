@@ -6,16 +6,35 @@ const mainStyle = {
 }
 
 export const Picture = props => {
+  
+  const {img, dim} = props;
+
+  function getImageWidth() {
+    switch (dim) {
+      case 'L' : 
+        return 284;
+      case 'M' :
+        return 180;
+    }
+  }
+
+  function getImageHeight() {
+    switch (dim) {
+      case 'L' :
+        return 475;
+      case 'M' :
+        return 274;
+    }
+  }
+
   const handleError = ( e ) => {
-    console.log("error loading image");
-    // this.parentNode.children[0].srcSet = this.parentNode.children[1].srcSet = this.src
+    e.target.parentNode.children[0].srcset = e.target.parentNode.children[1].src;
   }
   const view = (
     <picture style={mainStyle}>
-        <source srcSet={`${props.img}`} type="image/png" />
-        <img src="https://generative-placeholders.glitch.me/image?width=180&height=274&style=mondrian" 
-            alt="my image" 
-            onError={handleError} />
+        <source srcSet={`${img}`} type="image/png" />
+        <img src={`https://generative-placeholders.glitch.me/image?width=${getImageWidth()}&height=${getImageHeight()}&style=mondrian`}
+              alt="my image" onError={handleError} />
     </picture>
   );
 

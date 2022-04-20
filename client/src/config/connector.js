@@ -150,7 +150,7 @@ const Context = props => {
     const [section, search, locationKey] = props;
     console.log("section: ", section, "search:", search, "locationKey:", locationKey);
 
-    const suffix = (section == "/search" && search)? search : '/all';
+    const suffix = (section == "/search" && search)? search : (section.indexOf('bd') != -1) ? '' : '/all';
     const _section = (section && section != '/books') ? `${section}` : "";
     
     const path = `/book${_section}${suffix}`
