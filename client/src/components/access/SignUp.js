@@ -23,8 +23,6 @@ const signUpStyle = {
 export const SignUp = () => {
     const appContext = useUserContext();
     const { hero, disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
-    console.log("Hero:", hero);
-    console.log("USER: ", user);
     
     const onFinish = (values) => {
         console.log('Success:', values);
@@ -111,7 +109,7 @@ export const SignUp = () => {
                             </Button>
                         </Form.Item>
                         <div>
-                            Already have an account? Log in.
+                            Already have an account? <a href="/signin">Log in</a>.
                         </div>
                     </Form>
                 </Space>

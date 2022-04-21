@@ -7,6 +7,12 @@ import currencyClient from "./apiCurrency";
 // reducer
 import Reducer from "./reducer";
 
+
+import {
+  Space,
+  message
+} from 'antd';
+
 // type tags
 import {
   GET_CURRENCY,
@@ -14,10 +20,12 @@ import {
   GET_CATEGORIES,
   GET_PRODUCTS,
   GET_BOOKS,
+  GET_CARTITEMS,
   POST_USER,
   POST_CATEGORY,
   POST_PRODUCTS,
   POST_BOOKS,
+  POST_CARTITEMS,
   SET_PATH,
   SET_LOCATION
 } from "./constants";
@@ -38,9 +46,11 @@ const Context = props => {
     user: null,
     currency: null,
     books: [],
+    cartitems: [],
     categories: [],
     path: null,
-    location: null
+    location: null,
+    cart: 0
   };
 
   // Dispatch to execute actions
@@ -56,10 +66,21 @@ const Context = props => {
     });
   };
 
+  const success = () => {
+    message.success('Successful login');
+};
+
+const error = () => {
+    message.error('Login attempt failed');
+};
+
   // POST Methods
   const checkUser = async user => {
       var res = await axiosClient.post("/login", user)
-                                 .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
+                                 .catch(e => {
+                                   console.log((e.response)? JSON.stringify(e.response.data) : e.message);
+                                   error();
+                                 });
       
       if (res?.data?.content) {
         localStorage.setItem("user", JSON.stringify(res.data.content));
@@ -70,6 +91,16 @@ const Context = props => {
       payload: res?.data?.content
     });
   };
+
+  const removeUser = async user => {
+    var res = await axiosClient.post("/logout", user)
+                    .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
+
+    dispatch({
+      type: GET_USER,
+      payload: undefined
+    });
+  }
 
   const addUser = async user => {
     const res = await axiosClient.post("/users/add", user);
@@ -97,14 +128,39 @@ const Context = props => {
       payload: res.data
     });
   };
+
   const addBook = async book => {
-    const res = await axiosClient.post("/books/add", book);
+    const res = await axiosClient.post("/products/add", book);
 
     dispatch({
       type: POST_BOOKS,
       payload: res.data
     });
   };
+
+  const addCartItem = async (props) => {
+
+      console.log("addtocart:", JSON.stringify(props));
+      const {path, cartitem} = props;
+      
+
+      const res = await axiosClient.post(path, cartitem)
+                .catch(e => console.log(
+                  (e.response) ? 
+                    JSON.stringify(e.response.data) : 
+                    e.message)
+                );
+
+                console.log("res:", JSON.stringify(res));
+
+  if (res?.data) {
+      initialState.cart = res.data.cartId;
+      dispatch({
+          type: POST_CARTITEMS,
+          payload: res.data.cartItems
+      });
+  };
+}
 
   // GET Methods
   const getUser = async user => {
@@ -141,6 +197,16 @@ const Context = props => {
 
     dispatch({
       type: GET_PRODUCTS,
+      payload: res.data
+    });
+  };
+
+  const getCartItems= async () => {
+    console.log(`/cart/${initialState.cart}/all`);
+    const res = await axiosClient.get(`/cart/${initialState.cart}/all`);
+
+    dispatch({
+      type: GET_CARTITEMS,
       payload: res.data
     });
   };
@@ -189,14 +255,19 @@ const Context = props => {
         books: state.books,
         path: state.path,
         locationKey: state.locationKey,
+        cartitems: state.cartitems,
+        cart: state.cart,
         addUser,
+        removeUser,
         addCategory,
         addProduct,
+        addCartItem,
         addBook,
         getUser,
         checkUser,
         getCategories,
         getProducts,
+        getCartItems,
         getBooks,
         getCurrency
       }}

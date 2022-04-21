@@ -56,6 +56,7 @@ function App(){
                         {/* <AppContext.Provider value={{ disableNavigation }}> */}
                             <TopMost>
                                 <Routes>
+                                    <Route exact path="/books" element={<Catalog section="/books" />} />
                                     <Route exact path="/" element={<Catalog section="/books" />} />
                                     <Route exact path="/category/new-releases" element={<Catalog section="/newrel" />} />
                                     <Route exact path="/category/foreign" element={<Catalog section="/category/foreign" />} />

@@ -15,6 +15,8 @@ export const Picture = props => {
         return 284;
       case 'M' :
         return 180;
+      case 'S' :
+        return 36;
     }
   }
 
@@ -24,6 +26,8 @@ export const Picture = props => {
         return 475;
       case 'M' :
         return 274;
+      case 'S' :
+        return 58;
     }
   }
 

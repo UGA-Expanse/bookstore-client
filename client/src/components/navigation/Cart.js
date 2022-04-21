@@ -1,6 +1,6 @@
 const Cart = () => {
     return (
-        <a href="./cart">Shopping Cart</a>
+        <a href="/cart">Shopping Cart</a>
     );
 }
 

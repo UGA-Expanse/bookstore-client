@@ -12,8 +12,10 @@ import {
     Typography,
     Row,
     Col,
-    Space
+    Space,
+    message
 } from 'antd';
+
 
 const { Title } = Typography;
 const signInStyle = {
@@ -22,40 +24,56 @@ const signInStyle = {
 
 
 export const SignIn = () => {
-
+      
     const appContext = useUserContext();
-    const { hero, disableNavigation, user, getUser, checkUser, isLoggedOut } = appContext;
+    const { user, getUser, checkUser } = appContext;
 
     const [name, setName] = useState("");
-    const [picture, setPicture] = useState("");
+    const [password, setPassword] = useState("");
 
-    const handleChange1 = (e, value ) => setName({ value });
-    const handleChange2 = (e, { value }) => setPicture({ value });
+    // State Object to hold the form values
+    const [formData, setFormData] = React.useState({
+        username: "", 
+        email: "", 
+        password: "",
+        is_admin: ""
+    });
 
-    let alertMessage = '';
+    // const handleChange1 = (e, value ) => setName({ value });
+    // const handleChange2 = (e, { value }) => setPicture({ value });
 
-    const onFinish = (values) => {
-        const username = values.username
-            .replace(".com", "")
-            .replace(".co", "")
-            .replace(".", "");
-    
-        const user = {
-            username: username,
-            email: values.username,
+
+    function handleChange(e) {
+        const {name, type, value, checked} = e.target;
+
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value
+        }));
+    }
+
+    function onFinish(values) {
+        const userinfo = {
+            username: values.username,
+            email: values.email,
             password: values.password,
             is_admin: false
         };
-    
-        checkUser(user);
-    };
+
+        checkUser(userinfo);
+        // console.log("checkUser(userinfo):", a);
+        // if ( a ) {
+        //     success();
+        // } else {
+        //     error();
+        // }
+
+    } // onFinished
 
     const onFinishFailed = (errorInfo) => {
         console.log('Input validation failed:', errorInfo);
     };
 
-    console.log("rendering", JSON.stringify(user));
-    
     const view = (user?.username) ? (
         <Navigate to="/" />
         ) : (
@@ -83,7 +101,7 @@ export const SignIn = () => {
                                 },
                             ]}
                         >
-                            <Input onChange={handleChange1} />
+                            <Input onChange={handleChange} />
                         </Form.Item>
 
                         <Form.Item
@@ -96,19 +114,19 @@ export const SignIn = () => {
                                 },
                             ]}
                         >
-                            <Input.Password />
+                            <Input.Password onChange={handleChange} />
                         </Form.Item>
 
                         <Form.Item
-                            // name="remember"
                             valuePropName="checked"
+                            name="remember"
                             wrapperCol={{
                                 offset: 8,
                                 span: 16,
                             }}
                         >
                             <Checkbox>Remember me</Checkbox>
-                            <div>Forgot your password?</div>
+                            <div><a href="/forgot">Forgot your password?</a></div>
                         </Form.Item>
 
                         <Form.Item
@@ -122,7 +140,7 @@ export const SignIn = () => {
                             </Button>
                         </Form.Item>
                         <div>
-                            Don't have an account? Sign up here.
+                            Don't have an account? <a href="/signup">Sign up here</a>.
                         </div>
                     </Form>
                 </Space>

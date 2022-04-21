@@ -4,6 +4,8 @@ import {
     GET_PRODUCTS,
     POST_USER,
     POST_PRODUCTS,
+    POST_CARTITEMS,
+    GET_CARTITEMS,
     GET_USER,
     GET_CURRENCY,
     GET_BOOKS,
@@ -34,6 +36,11 @@ import {
           ...state,
           products: action.payload
         };
+      case POST_CARTITEMS:
+        return {
+          ...state,
+          cartitems: action.payload
+        };
       case POST_BOOKS:
         return {
           ...state,
@@ -49,6 +56,11 @@ import {
           ...state,
           products: action.payload
         };
+        case GET_CARTITEMS:
+          return {
+            ...state,
+            cartitems: action.payload
+          };
       case GET_BOOKS:
         return {
           ...state,

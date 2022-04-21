@@ -18,6 +18,7 @@
     "react-query": "^3.34.16",
     "react-router-dom": "^6.2.2",
     "react-scripts": "5.0.0",
+    "react-session": "^0.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -44,7 +45,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://j5.rocks:8080",
   "devDependencies": {
     "sass": "^1.49.9",
     "sass-loader": "^12.6.0",

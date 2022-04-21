@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+                                                        import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router';
 import {Context, useUserContext} from "../../config/connector";
 
@@ -16,7 +16,9 @@ import BackToResults from "../../components/links/BackToResults";
 import Carousel from "../../components/Carousel";
 import data from "../../tmp/data_manga";
 import Picture from "../../components/Picture";
+import Price from "../../components/Price";
 import BookDescriptor from "../../components/BookDescriptor";
+import AddToCart from "../../components/links/AddToCart";
 
 export const CatalogBookDetailContainer = props => {
 
@@ -29,7 +31,6 @@ export const CatalogBookDetailContainer = props => {
     let location = useLocation();
 
     React.useEffect(() => {
-        console.log("RUNNING USEEFFECT", location.pathname);
         getBooks([`${location.pathname}`, "", ""])
     }, []);
 
@@ -39,7 +40,7 @@ export const CatalogBookDetailContainer = props => {
     }
 
     const rightItemStyle = {
-        width: "350px"
+        minWidth: "350px"
     }
 
     const leftItemStyle = {
@@ -79,16 +80,17 @@ export const CatalogBookDetailContainer = props => {
                             </div>
                             <div>
                                  <h3>Book details</h3>
-                                <span class="rowHeader">Publisher ‏ : ‎ {`${books.publisher.publisherName} (${books.publicationDate})`}</span><br/>
-                                <span class="rowHeader">Language ‏ : ‎ {books.language.languageName}</span><br/>
-                                <span class="rowHeader">Pages ‏ : ‎ {`${books.numPages} pages`}</span><br/>
-                            <span class="rowHeader">ISBN-13 ‏ : ‎ {books.isbn13}</span>
+                                <span className="rowHeader">Publisher ‏ : ‎ {`${books.publisher.publisherName} (${books.publicationDate})`}</span><br/>
+                                <span className="rowHeader">Language ‏ : ‎ {books.language.languageName}</span><br/>
+                                <span className="rowHeader">Pages ‏ : ‎ {`${books.numPages} pages`}</span><br/>
+                            <span className="rowHeader">ISBN-13 ‏ : ‎ {books.isbn13}</span>
+                            </div>
+                            <div>
+                            <Price bookId={books.id} />
                             </div>
                         </div>
                         <div style={leftItemStyle}>
-                            <Button type="primary">
-                                Add to Cart
-                            </Button>
+                            <AddToCart bookId={books.id}/>
                         </div>
                 </Col>
             </Row>

@@ -1,14 +1,13 @@
 import React, { useContext, useState } from "react";
 import {Context, useUserContext} from "../../../config/connector";
 
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 
 import { Menu } from "antd";
 import { ShoppingOutlined, ShoppingFilled } from '@ant-design/icons';
 // import { MenuDivider } from Menu;
 // Divider: React.FC<import("./MenuDivider").MenuDividerProps>;
-
 
 import SignUp from "../../../components/navigation/SignUp";
 import SignIn from "../../../components/navigation/SignIn";
@@ -24,7 +23,7 @@ const menuStyle = {
 
 export const Navigation = () => {
     const userContext = useUserContext();
-    const { disableNavigation, user, getUser, checkUser, isLoggedOut } = userContext;
+    const { user, removeUser } = userContext;
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
@@ -35,7 +34,12 @@ export const Navigation = () => {
 
     // Functions
     const handleClick = events => {
-        console.log(events.target);
+        console.log(events.key);
+        switch (events.key) {
+            case "signoff" :
+                removeUser();
+                break;
+        }
     };
 
     const handleItemClick = (e, { name }) => setActiveItem(name);
