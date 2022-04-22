@@ -7906,6 +7906,11 @@ react-scripts@5.0.0, react-scripts@^5.0.0:
   optionalDependencies:
     fsevents "^2.3.2"
 
+react-session@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/react-session/-/react-session-0.0.1.tgz#7e1c093bde6f94e87a1cb6308569d20ee31c2593"
+  integrity sha1-fhwJO95vlOh6HLYwhWnSDuMcJZM=
+
 react@^17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"

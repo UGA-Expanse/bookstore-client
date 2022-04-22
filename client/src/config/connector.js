@@ -26,6 +26,7 @@ import {
   POST_PRODUCTS,
   POST_BOOKS,
   POST_CARTITEMS,
+  POST_CART,
   SET_PATH,
   SET_LOCATION
 } from "./constants";
@@ -153,12 +154,24 @@ const error = () => {
 
                 console.log("res:", JSON.stringify(res));
 
+                
   if (res?.data) {
-      initialState.cart = res.data.cartId;
+      // initialState.cart = res.data.content.id;
+      // const resCartItems = ;
+      // console.log("updating initstate", JSON.stringify(resCartItems));
+      // const content = {
+      //   cart: res.data.content.id,
+        const lcartitems = [...(initialState.cartitems), ...(res.data.content.cartItems) ];
+      // };
       dispatch({
           type: POST_CARTITEMS,
-          payload: res.data.cartItems
+          payload: lcartitems
       });
+
+      dispatch({
+        type: POST_CART,
+        payload: res.data.content.id
+    });
   };
 }
 

@@ -5,6 +5,7 @@ import {
     POST_USER,
     POST_PRODUCTS,
     POST_CARTITEMS,
+    POST_CART,
     GET_CARTITEMS,
     GET_USER,
     GET_CURRENCY,
@@ -36,9 +37,16 @@ import {
           ...state,
           products: action.payload
         };
-      case POST_CARTITEMS:
+      case POST_CART:
         return {
-          ...state,
+            ...state,
+            cart: action.payload
+        };
+      case POST_CARTITEMS:
+        console.log("contents of state:", state)
+        return {
+            ...state,
+            // cart: action.payload.content.cart,
           cartitems: action.payload
         };
       case POST_BOOKS:

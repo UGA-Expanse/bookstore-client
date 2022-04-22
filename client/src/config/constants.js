@@ -6,6 +6,8 @@ export const POST_CATEGORY = "POST_CATEGORY";
 export const POST_PRODUCTS = "POST_PRODUCTS";
 export const POST_BOOKS = "POST_BOOKS";
 export const POST_CARTITEMS = "POST_CARTITEMS";
+export const POST_CART = "POST_CART";
+
 
 // GET Method Tags
 export const GET_USER = "GET_USER";
