@@ -21,18 +21,25 @@ const mainStyle = {
 
 export const CatalogPage = props => {
 
-    console.log("Rendering CatalogPage.js");
-
     let navigate = useNavigate();
     let location = useLocation();
+    
+    function loadBookCatalog(books, section, search, location) {
+        if (!books || books.length <= 1) {
+            getBooks([section, search, location.key]);
+        }
+    }
 
     const appContext = useUserContext();
-    const { user, path, books, getBooks, getCategories, locationKey } = appContext;
+    const { user, path, books, getBooks, getCategories } = appContext;
+
+
+    console.log(`<CatalogPage />::container.js>start>>path:${JSON.stringify({})}`);
 
     const search = location.search;
     const section = props.section;
 
-    console.log("query:", search);
+    // console.log("query:", search);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [cardsPerPage, setCardsPerPage] = useState(6);
@@ -45,23 +52,12 @@ export const CatalogPage = props => {
             />
         ); // return
     });
-    const localPath = path;
-    console.log("oldKey vs currentkey", locationKey, location.key);
-    console.log(`path (${path}) vs props.section (${section})`);
+
     useEffect(() => {
-        getBooks([section, search, location.key])
+       loadBookCatalog(books, section, search, location.key);
     }, []);
-    // if (locationKey != location.key) {// || section == "/search") { //} && path != props.section && books?.length != 0)) {
-        // useEffect(() => {
-            // getBooks([section, search, location.key]);
-        //   }, [path]);
-    // } else {
-    //     console.log("Skipping data load");
-    // }
 
-    console.log("after getBooks, but before render: books.length", books?.length);
-
-    const view = (Array.isArray(books) && books.length) ? 
+    const view = (true) ? //(Array.isArray(books) && books.length) ? 
         (
             <>
                 <Row>
@@ -76,8 +72,8 @@ export const CatalogPage = props => {
                 </Row>
             </>
         ) : <> </>; // return
-        
-        console.log("after getBooks, just before render");
+
+        console.log(`<CatalogPage />::container.js>end>>path:${JSON.stringify({})}`);
 
     return view;
 

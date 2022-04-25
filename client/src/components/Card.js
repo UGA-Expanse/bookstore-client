@@ -45,7 +45,7 @@ export const Card = props => {
             bordered={true}
             actions={[<AddToCart bookId={props.id} />, <BuyNow bookId={props.id} />]}
             style={{ width: 200 }}
-            cover={<Picture dim="M" img={`https://covers.openlibrary.org/b/isbn/${props.isbn13}-M.jpg?default=true`} />}
+            cover={<Picture dim="M" img={`https://covers.openlibrary.org/b/isbn/${props.isbn13}-M.jpg?default=false`} />}
         >
             {badgeText && <div className="card--badge">SOLD OUT</div>}
             <Price bookId={props.id} />

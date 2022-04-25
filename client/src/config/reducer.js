@@ -12,7 +12,8 @@ import {
     GET_BOOKS,
     POST_BOOKS,
     SET_PATH,
-    SET_LOCATION
+    SET_LOCATION,
+    GET_CART
   } from "./constants";
   
   export default (state, action) => {
@@ -43,10 +44,8 @@ import {
             cart: action.payload
         };
       case POST_CARTITEMS:
-        console.log("contents of state:", state)
         return {
             ...state,
-            // cart: action.payload.content.cart,
           cartitems: action.payload
         };
       case POST_BOOKS:
@@ -59,6 +58,11 @@ import {
           ...state,
           user: action.payload
         };
+        case GET_CART:
+          return {
+            ...state,
+            cart: action.payload
+          };
       case GET_PRODUCTS:
         return {
           ...state,

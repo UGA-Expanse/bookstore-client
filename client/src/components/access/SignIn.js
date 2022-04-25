@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
+import axiosClient from "../../config/axios";
 
 import {Context, useUserContext} from "../../config/connector";
 
@@ -15,6 +16,7 @@ import {
     Space,
     message
 } from 'antd';
+import axios from "axios";
 
 
 const { Title } = Typography;
@@ -72,6 +74,18 @@ export const SignIn = () => {
 
     const onFinishFailed = (errorInfo) => {
         console.log('Input validation failed:', errorInfo);
+    };
+
+    const fetchValue = () => {
+        axiosClient.get("/")
+        .then(resp => console.log(JSON.stringify(resp)))
+        .catch(e => alert(e));
+    };
+
+    const postValue = () => {
+        axiosClient.post("/persistMessage?msg=helloworld1")
+        .then(resp => console.log(JSON.stringify(resp)))
+        .catch(e => alert(e));
     };
 
     const view = (user?.username) ? (
@@ -135,9 +149,14 @@ export const SignIn = () => {
                                 span: 16,
                             }}
                         >
-                            <Button type="primary" htmlType="submit">
-                                Sign In
+                            <Button type="primary" htmlType="button" onClick={fetchValue}>
+                                Fetch
                             </Button>
+
+                            <Button type="primary" htmlType="button" onClick={postValue}>
+                                send
+                            </Button>
+                            
                         </Form.Item>
                         <div>
                             Don't have an account? <a href="/signup">Sign up here</a>.

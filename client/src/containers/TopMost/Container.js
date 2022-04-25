@@ -14,6 +14,7 @@ import "./index.css";
 import Navigation from "./Navigation/Navigation";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
+import { GET_CART } from "../../config/constants";
 
 const mainStyle = {
     minHeight: '65vh',
@@ -37,9 +38,27 @@ const footerStyle = {
 
 
 export const Container = ({ children }) => {
-    console.log("Container.js...");
+
     const appContext = useUserContext();
-    const { disableNavigation, user, getUser, checkUser, path } = appContext;
+    const { disableNavigation, user, getUser, checkUser, path, cart, getCart } = appContext;
+
+    console.log(`TopMost::Container.js>start>>cart:${JSON.stringify({})}`);
+
+    console.log("----------------------------------");
+    console.log("TOPMOST Cart: ", cart);
+    console.log("TOPMOST user: ", user);
+    console.log("TOPMOST Path: ", path);
+    console.log("----------------------------------");
+
+    const cartlocal = React.useEffect(() => {
+        console.log("Retrieving CAER cart retrieval");
+        // const cart = JSON.parse(localStorage.getItem('cart'));
+        // console.log("CART:", cart);
+        // if (!cart || cart.id == undefined) {
+        //     alert("calling cart");
+            getCart({cartid:0});
+        // }
+    }, []);
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
@@ -58,6 +77,7 @@ export const Container = ({ children }) => {
             </Layout>
         ); // return
 
+        console.log(`TopMost::Container.js>end>>cart:${JSON.stringify([])}`);
     return view;
 
 } // export TopMost

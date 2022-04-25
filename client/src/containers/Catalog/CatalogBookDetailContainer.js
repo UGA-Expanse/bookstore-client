@@ -1,4 +1,4 @@
-                                                        import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router';
 import {Context, useUserContext} from "../../config/connector";
 
@@ -22,16 +22,27 @@ import AddToCart from "../../components/links/AddToCart";
 
 export const CatalogBookDetailContainer = props => {
 
+    function loadBookCatalog(props) {
+        if (!books || books.length != 1) {
+            getBooks([`${location.pathname}`, "", ""]);
+        }
+    }
+
     const appContext = useUserContext();
-    const { user, path, books, getBooks, getCategories, locationKey } = appContext;
+    const { user, path, books, getBooks, getCategories, locationKey, cart } = appContext;
+
+    console.log(`<CatalogBookDetailContainer />::container.js>start>>path:${JSON.stringify({})}`);
+
 
     console.log("books:", JSON.stringify(books));
+    console.log("USER: ", user);
+    console.log("cart: ", cart);
 
     let navigate = useNavigate();
     let location = useLocation();
 
     React.useEffect(() => {
-        getBooks([`${location.pathname}`, "", ""])
+        loadBookCatalog([`${location.pathname}`, "", ""]);
     }, []);
 
     const containerStyle = {
@@ -98,6 +109,8 @@ export const CatalogBookDetailContainer = props => {
             </>
 
     ) : (<></>); // return
+
+    console.log(`<CatalogBookDetailContainer />::container.js>end>>path:${JSON.stringify({})}`);
 
     return view;
 

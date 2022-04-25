@@ -15,6 +15,7 @@ import {
 
 // type tags
 import {
+  GET_CART,
   GET_CURRENCY,
   GET_USER,
   GET_CATEGORIES,
@@ -37,6 +38,7 @@ const userContext = React.createContext();
 function useUserContext() {
   const context = React.useContext(userContext);
   if (context === undefined) {
+    alert("usercontext is null so not loaded");
     throw new Error('userContext must be used within a UserContextProvider')
   }
   return context
@@ -51,7 +53,7 @@ const Context = props => {
     categories: [],
     path: null,
     location: null,
-    cart: 0
+    cart: {}
   };
 
   // Dispatch to execute actions
@@ -156,23 +158,39 @@ const error = () => {
 
                 
   if (res?.data) {
-      // initialState.cart = res.data.content.id;
-      // const resCartItems = ;
-      // console.log("updating initstate", JSON.stringify(resCartItems));
-      // const content = {
-      //   cart: res.data.content.id,
-        const lcartitems = [...(initialState.cartitems), ...(res.data.content.cartItems) ];
-      // };
+      localStorage.setItem("cart", JSON.stringify(res.data.content));
+
       dispatch({
           type: POST_CARTITEMS,
-          payload: lcartitems
+          payload: res.data.content.cartItems
       });
 
       dispatch({
         type: POST_CART,
-        payload: res.data.content.id
+        payload: res.data.content
     });
   };
+}
+
+const updateCartItem = (props) => {
+
+  const {path} = props;
+
+  axiosClient.get(path)
+      .then( (res) => {
+          if (res?.data) {
+            localStorage.setItem("cart", JSON.stringify(res.data.content));
+            console.log("Connector.js cart first name/count", res.data.content.cartItems[0].book.title, res.data.content.cartItems[0].quantity);
+            dispatch({
+                type: POST_CART,
+                payload: res.data.content
+            });
+          };  
+      })
+      .catch(e => console.log(
+              (e.response) ? 
+                JSON.stringify(e.response.data) : 
+                e.message));
 }
 
   // GET Methods
@@ -214,9 +232,11 @@ const error = () => {
     });
   };
 
-  const getCartItems= async () => {
-    console.log(`/cart/${initialState.cart}/all`);
-    const res = await axiosClient.get(`/cart/${initialState.cart}/all`);
+  const getCartItems= async (props) => {
+    const {cart} = props;
+
+    console.log(`getCartItems URL: /cart/${cart}/all`);
+    const res = await axiosClient.get(`/cart/${cart}/all`);
 
     dispatch({
       type: GET_CARTITEMS,
@@ -246,17 +266,46 @@ const error = () => {
         payload: res?.data
       });
 
-      dispatch({
-        type: SET_PATH,
-        payload: section
-      });
+      // dispatch({
+      //   type: SET_PATH,
+      //   payload: section
+      // });
 
-      dispatch({
-        type: SET_LOCATION,
-        payload: locationKey
-      });
+      // dispatch({
+      //   type: SET_LOCATION,
+      //   payload: locationKey
+      // });
     } 
   };
+
+  const getCart = props => {
+    const localCart = JSON.parse(localStorage.getItem("cart"));
+
+    if (localCart && localCart.id > 0) {
+  
+      dispatch({
+        type: GET_CART,
+        payload: localCart
+      });
+      return;
+    }
+
+    const {cartid} = props;
+
+    axiosClient.get(`/cart/${cartid}`)
+        .then(res => {
+          if (res.data.content) {
+            localStorage.setItem("cart", JSON.stringify(res.data.content));
+            dispatch({
+              type: GET_CART,
+              payload: res.data.content
+            });
+          } else {
+            throw new Error("problem getting cart data");
+          }
+        })
+        .catch(e => console.log((e.response)? JSON.stringify(e.response.data) : e.message));
+    };                                                                                               
 
   return (
     <userContext.Provider
@@ -282,7 +331,9 @@ const error = () => {
         getProducts,
         getCartItems,
         getBooks,
-        getCurrency
+        getCurrency,
+        getCart,
+        updateCartItem
       }}
     >
       {props.children}

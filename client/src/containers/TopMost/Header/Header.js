@@ -26,6 +26,8 @@ export const Header = props => {
     const userContext = useUserContext();
     const { disableNavigation, user, getUser, books, checkUser, isLoggedOut, getBooks, getCategories } = userContext;
 
+    console.log(`TopMost::Header.js>start>>cart:${JSON.stringify(user)}`);
+
     let booksCopy;
     var activeNavigation;
     const onSearch = value => {
@@ -36,12 +38,12 @@ export const Header = props => {
         controller(target);
     };
 
-    console.log("evaluationg books..............", books != booksCopy, activeNavigation);
-    if (books != booksCopy && activeNavigation) {
-        console.log("eval... 2");
-        console.log("eval navigating....");
-        // navigate(activeNavigation);
-    }
+    // console.log("evaluationg books..............Header", books != booksCopy, activeNavigation);
+    // if (books != booksCopy && activeNavigation) {
+    //     console.log("eval... 2");
+    //     console.log("eval navigating....");
+    //     // navigate(activeNavigation);
+    // }
 
     let searchSelectedCriteria = "books";
     const handleCategorySelect = (value) => {
@@ -59,13 +61,15 @@ export const Header = props => {
 
     const controller = (target) => {
         const [section, search, locationKey, path] = target;
-        console.log("eval ontroller.....");
+        
+        getBooks(target);
+        navigate(path)
 
         // if (locationKey != location.key) {// || section == "/search") { //} && path != props.section && books?.length != 0)) {
             // useEffect(() => {
-                booksCopy = books;
-                getBooks(target);
-                navigate(path)
+                // booksCopy = books;
+                // getBooks(target);
+                
             //   }, [path]);
         // } else {
         //     console.log("Skipping data load");
@@ -121,6 +125,9 @@ export const Header = props => {
             <Layout.Header className="header__subnav"><SubNavigation/></Layout.Header>
 </>
     ); // return
+
+    console.log(`TopMost::Header.js>end>>cart:${JSON.stringify(user)}`);
+
 
     return view;
 } // export Header

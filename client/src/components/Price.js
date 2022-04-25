@@ -32,7 +32,7 @@ export const Price = props => {
       <p>
         <span aria-hidden="true">
         <span className="a-price-symbol">$</span>
-        <span className="a-price-whole">{price.listPrice}</span>
+        <span className="a-price-whole">{Number.parseFloat(price.listPrice).toFixed(2)}</span>
         </span>
       </p>
     </div>

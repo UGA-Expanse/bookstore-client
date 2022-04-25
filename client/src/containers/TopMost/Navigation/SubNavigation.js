@@ -49,7 +49,12 @@ export const SubNavigation = () => {
                 navigate('/category/magazines');
                 break;
             case "comics" :
-                navigate("/category/comics");
+                section = '/category/comics';
+                searchQuery = '';
+                locationKey = "comics";
+                pathVar = "/category/comics";
+                target = [section, searchQuery, locationKey, pathVar];
+                controller(target);
                 break;
             case "foreign" :
                 section = '/category/foreign';
@@ -73,8 +78,8 @@ export const SubNavigation = () => {
                 disabledOverflow={true}
                 onClick={handleClick}>
             <Menu.Item key="books">Books</Menu.Item>
-            <Menu.Item key="newreleases">New Releases</Menu.Item>
-            <Menu.Item key="textbooks">Textbooks</Menu.Item>
+            {/* <Menu.Item key="newreleases">New Releases</Menu.Item>
+            <Menu.Item key="textbooks">Textbooks</Menu.Item> */}
             <Menu.Item key="comics">Comics & Graphic Novels</Menu.Item>
             <Menu.Item key="foreign">Foreign Books</Menu.Item>
         </Menu>

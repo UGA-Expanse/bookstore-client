@@ -1,7 +1,8 @@
 import {
     useEffect,
-    useState
+    useState,
 } from "react";
+import { ReactSession } from 'react-client-session';
 import {
     QueryClient,
     QueryClientProvider
@@ -39,14 +40,10 @@ function App(){
     const queryClient = new QueryClient();
     const [isLoggedOut, setIsLoggedOut] = useState( true );
     const [disableNavigation, setDisableNavigation] = useState( false );
-    // const match = useRouteMatch({
-    //     path: "/bd/isbn13/:id/",
-    //     strict: true,
-    //     sensitive: true
-    //   });
-      
     
-
+    
+    ReactSession.setStoreType("cookie");
+      
     // if (isLoggedOut) {
     return (
         <ContextConnector>
@@ -60,6 +57,7 @@ function App(){
                                     <Route exact path="/" element={<Catalog section="/books" />} />
                                     <Route exact path="/category/new-releases" element={<Catalog section="/newrel" />} />
                                     <Route exact path="/category/foreign" element={<Catalog section="/category/foreign" />} />
+                                    <Route exact path="/category/comics" element={<Catalog section="/category/comics" />} />
                                     <Route exact path="/verify" element={<VerifyEmailAddress />} />
                                     <Route exact path="/reset" element={<ForgotPassword />} />
                                     <Route exact path="/signin" element={<SignIn />} />

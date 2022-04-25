@@ -11,6 +11,7 @@ export const POST_CART = "POST_CART";
 
 // GET Method Tags
 export const GET_USER = "GET_USER";
+export const GET_CART = "GET_CART";
 export const GET_CATEGORIES = "GET_CATEGORIES";
 export const GET_PRODUCTS = "GET_PRODUCTS";
 export const GET_BOOKS = "GET_BOOKS";

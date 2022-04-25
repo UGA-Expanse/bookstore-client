@@ -1,3 +1,5 @@
+import {Context, useUserContext} from "../../config/connector";
+
 import Picture from "../../components/Picture"
 
 import {
@@ -5,16 +7,19 @@ import {
   Checkbox,
   Typography,
   Select,
-  Button
+  Button,
+  Divider
 } from "antd";
 
 const { CheckboxGroup } = Checkbox;
-const { Title } = Typography;
+const { Title, h1 } = Typography;
 const { Option } = Select;
 
 const cartItemRowStyle = {
   display: 'flex',
-  flexDirection: 'horizontal'
+  flexDirection: 'horizontal',
+  alignItems: 'center',
+  width: '100%'
 };
   
 const cartItemCheckboxCell = {
@@ -29,13 +34,14 @@ const cartItemContentContainer = {
 };
 
 const cartItemImageCell = {
-  width: '180px',
+  width: '300px',
   textAlign: 'center'
 };
 const cartItemMetadataCell = {
   flexGrow: 1,
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  width: '460px'
 
 };
 
@@ -44,40 +50,58 @@ const cartItemPriceCell = {
   textAlign: 'right'
 };
 
+const cartContainerHeaderStyle = {
+  textAlign: 'end',
+  borderBottom: '1px solid #F0F0F0',
+  marginBottom: "20px"
+};
 
-export const CartRow = (props) => {
 
-  const {cartItemId, title, price, qty, book, publisher} =   props;
+export const CartRow = ({props: { cart_item_id, quantity, price, book: { title, isbn13, publisher: {publisherName} } }}) => {
+    const appContext = useUserContext();
+    const { cart, updateCartItem } = appContext;
 
-  function handleChange(value) {
-    console.log(`selected ${value}`);
-  }
+    function handleQuantityChange(value, options, id) {
+      const path = `/cart/${cart.id}/cartitem/${id}?qty=${value}`;
+      updateCartItem({path});
+    }
 
+    function handleDeleteClick(e, cartItemId) {
+      const path = `/cart/${cart.id}/cartitem/${cartItemId}?qty=0`;
+      updateCartItem({path});
+    }
+
+    console.log("cart_item_id:", cart_item_id);
+    
   const view = (
-
-      
+    <>
         <div className="cart-item__row" style={cartItemRowStyle}>
           <div className="cart-item__checkbox-cell" style={cartItemCheckboxCell}>
-            <Checkbox value={cartItemId}/>
+            <Checkbox value={cart_item_id}/>
           </div>
           <div className="cart-item__image-cell" style={cartItemImageCell}>
-            <Picture dim="S" img={`https://covers.openlibrary.org/b/isbn/${book.isbn13}-S.jpg?default=false`} />
+            <Picture dim="M" img={`https://covers.openlibrary.org/b/isbn/${isbn13}-M.jpg?default=false`} />
           </div>
           <div className="cart-item__metadata-cell" style={cartItemMetadataCell}>
-            <Title>{title}</Title>
-            <div>{publisher}</div>
+            <Title level={3}>{title}</Title>
+            <div>{publisherName}</div>
             <div>In Stock</div>
             <div>
-              <Select defaultValue="{qty}" style={{ width: 120 }} onChange={handleChange}>
-                <Option value="1">Qty: 1</Option>
-                <Option value="2">Qty: 2</Option>
-                <Option value="3">Qty: 3</Option>
-                <Option value="4">Qty: 4</Option>
+              <Select defaultValue={quantity} ci={cart_item_id} style={{ width: 120 }} 
+                  onChange={(value, options) => handleQuantityChange(value, options, cart_item_id)}>
+                <Option key={1} value={1}>Qty: 1</Option>
+                <Option key={2} value={2}>Qty: 2</Option>
+                <Option key={3} value={3}>Qty: 3</Option>
+                <Option key={4} value={4}>Qty: 4</Option>
               </Select>
+              <Divider type="vertical" />
+              <Button type="primary" shape="round" onClick={(e) => handleDeleteClick(e, cart_item_id)}>Delete</Button>
             </div>
           </div>
           <div className="cart-item__price-cell" style={cartItemPriceCell}>{price}</div>
         </div>
+         <div  className="cart-item__row" style={cartItemRowStyle}> <Divider orientation="right"/></div>
+         </>
       
 
   ); // view

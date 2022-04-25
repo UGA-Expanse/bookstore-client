@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import {Context, useUserContext} from "../../../config/connector";
-
+import { useNavigate, useLocation } from 'react-router';
 import { Link, Navigate } from "react-router-dom";
 
 
@@ -23,7 +23,9 @@ const menuStyle = {
 
 export const Navigation = () => {
     const userContext = useUserContext();
-    const { user, removeUser } = userContext;
+    const { user, cart, removeUser, getCart } = userContext;
+
+    console.log(`Navigation.js>start>>user:${JSON.stringify(user)}`);
 
     const [name, setName] = useState("");
     const [picture, setPicture] = useState("");
@@ -31,13 +33,16 @@ export const Navigation = () => {
     const path = "home";
     const [ activeItem, setActiveItem ] = useState(path);
 
+    let navigate = useNavigate();
 
     // Functions
-    const handleClick = events => {
-        console.log(events.key);
-        switch (events.key) {
+    const handleClick = e => {
+        switch (e.key) {
             case "signoff" :
                 removeUser();
+                break;
+            case "cart" :
+                navigate("/cart");
                 break;
         }
     };
@@ -45,6 +50,7 @@ export const Navigation = () => {
     const handleItemClick = (e, { name }) => setActiveItem(name);
     // States
     const view = user ? (
+        
         <Menu
             selectedKeys={[path]}    
             theme="light" mode=
@@ -55,7 +61,7 @@ export const Navigation = () => {
             onClick={handleClick}>
                 <Menu.Item key="account">Account</Menu.Item>
                 <Menu.Item key="signoff">Sign Off</Menu.Item>
-                <Menu.Item key="cart" icon={<ShoppingOutlined />}><Cart/></Menu.Item>
+                <Menu.Item key="cart" icon={<ShoppingOutlined />}>Shopping Cart</Menu.Item>
             </Menu>
     ) : (
         <Menu
@@ -68,10 +74,11 @@ export const Navigation = () => {
             onClick={handleClick}>
                 <Menu.Item key="signup"><SignUp /></Menu.Item>
                 <Menu.Item key="signin"><SignIn /></Menu.Item>
-                <Menu.Item key="cart" icon={<ShoppingOutlined />}><Cart/></Menu.Item>
+                <Menu.Item key="cart" icon={<ShoppingOutlined />}>Shopping Cart</Menu.Item>
             </Menu>
     );
 
+    console.log(`Navigation.js>end>>cart:${JSON.stringify({})}`);
     return view; // return
 
 } // export
