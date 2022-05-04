@@ -2,8 +2,6 @@ import {
     Space
 } from "antd";
 
-
-
 export const Footer = () => {
 
     const footerStyle = {
@@ -27,6 +25,12 @@ export const Footer = () => {
                expanse
            </span>
            <span>©2022 Created by CSCI 4050 Group 10</span>
+           <br/>
+           <p>
+               <a href="/affiliates">affiliates</a><br/>
+               <a href="/aboutus">about us</a><br/>
+               <a href="/refefences">references</a>
+            </p>
        </section>
     ); // return
 } // export

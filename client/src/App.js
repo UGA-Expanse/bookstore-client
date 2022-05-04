@@ -15,6 +15,7 @@ import {
 } from "react-router-dom";
 
 import {Context as ContextConnector} from "./config/connector";
+import Cookies from 'js-cookie';
 
 // Custom defined contexts
 import LogoutContext from "./context/LogoutContext";
@@ -25,8 +26,10 @@ import Catalog from "./containers/Catalog/CatalogPage";
 import BookDetail from "./containers/Catalog/CatalogBookDetailContainer";
 import SignIn from "./components/access/SignIn";
 import SignUp from "./components/access/SignUp";
+import SignOff from "./components/access/SignOff";
 import MerchantViewContainer from "./containers/MerchantView/MerchantVIewContainer";
 import Cart from "./containers/Cart/Cart";
+import AffliatesView from "./containers/Affiliates/AffliatesContainer";
 
 import logo from './logo.svg';
 import './App.css';
@@ -43,6 +46,9 @@ function App(){
     
     
     ReactSession.setStoreType("cookie");
+    sessionStorage.setItem("my-key", "123");
+    
+    // const username = ReactSession.get("username");
       
     // if (isLoggedOut) {
     return (
@@ -60,13 +66,16 @@ function App(){
                                     <Route exact path="/category/comics" element={<Catalog section="/category/comics" />} />
                                     <Route exact path="/verify" element={<VerifyEmailAddress />} />
                                     <Route exact path="/reset" element={<ForgotPassword />} />
-                                    <Route exact path="/signin" element={<SignIn />} />
+                                    <Route path="/signin" element={<SignIn action="/customer" forInternalUse="false" />} />
+                                    <Route path="/signoff" element={<SignOff />} />
                                     <Route exact path="/signup" element={<SignUp />} />
                                     <Route exact path="/inventory" element={<Inventory />} />
                                     <Route exact path="/cart" element={<Cart />} />
                                     <Route exact path="/search" element={<Catalog section="/search" />} />
                                     <Route path="/merchant" element={ <MerchantViewContainer /> } />
+                                    <Route path="/affiliates" element={ <AffliatesView /> } />
                                     <Route path="/bd/isbn/:isbn13" element={<BookDetail />} />
+                                    
                                 </Routes>
                             </TopMost>
                         {/* </AppContext.Provider> */}

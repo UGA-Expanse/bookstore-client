@@ -62,8 +62,8 @@ export const CartRow = ({props: { cart_item_id, quantity, price, book: { title, 
     const { cart, updateCartItem } = appContext;
 
     function handleQuantityChange(value, options, id) {
-      const path = `/cart/${cart.id}/cartitem/${id}?qty=${value}`;
-      updateCartItem({path});
+        const path = `/cart/${cart.id}/cartitem/${id}?qty=${value}`;
+        updateCartItem({path});
     }
 
     function handleDeleteClick(e, cartItemId) {

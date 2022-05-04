@@ -15,16 +15,18 @@ const AddToCart = props => {
     let location = useLocation();
 
     const controller = (props) => {
-        addCartItem(props);
-        navigate("/cart");
+        addCartItem(props)
+        .then( resp => navigate("/cart"));
     }
 
     const handleClick = (e) => {
         const props = new Object();
-        props.path = `/cart/${cart.id}/add/${bookId}`;
+        let cartId = (cart != undefined) ? cart.id : 0;
+        if (cartId == undefined) cartId = 0;
+        props.path = `/cart/${cartId}/add/${bookId}`;
         props.cartitem = { bookId: bookId };
-        controller(props);
         e.stopPropagation();
+        controller(props);
     }
 
     const view = location.pathname.includes("isbn") ? 

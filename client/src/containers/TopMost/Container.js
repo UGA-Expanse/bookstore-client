@@ -46,7 +46,7 @@ export const Container = ({ children }) => {
 
     console.log("----------------------------------");
     console.log("TOPMOST Cart: ", cart);
-    console.log("TOPMOST user: ", user);
+    console.log("TOPMOST user: ", user?.username);
     console.log("TOPMOST Path: ", path);
     console.log("----------------------------------");
 

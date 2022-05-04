@@ -36,6 +36,11 @@ export const CatalogPage = props => {
 
     console.log(`<CatalogPage />::container.js>start>>path:${JSON.stringify({})}`);
 
+
+    console.log("user:", user);
+    console.log("user:", user?.username);
+    console.log("books:", books);
+
     const search = location.search;
     const section = props.section;
 

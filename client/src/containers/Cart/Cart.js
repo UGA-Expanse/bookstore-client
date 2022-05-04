@@ -31,7 +31,7 @@ export const Cart = (props) => {
     const appContext = useUserContext();
     const { user, path, getCart, cartitems, getCartItems, postCartItems, locationKey, cart } = appContext;
 
-    console.log(`Cart.js>start>>cart:${JSON.stringify({})}`);
+    console.log(`Cart.js>start>>cart:${JSON.stringify({cart})}`);
 
     let navigate = useNavigate();
     let location = useLocation();
@@ -88,6 +88,8 @@ export const Cart = (props) => {
         marginBottom: "20px"
     };
     console.log(JSON.stringify(cart.cartItems))
+    console.log(Object.keys(cart).length);
+    
     const cartRows = (cart != undefined && Object.keys(cart).length > 0 && cart.cartItems.length > 0) ? 
                         cart.cartItems.map(cartitem => <CartRow props={cartitem} />) : <></>;
 

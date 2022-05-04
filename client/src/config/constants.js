@@ -20,3 +20,5 @@ export const GET_CARTITEMS = "GET_CARTITEMS";
 // Constant vars
 export const SET_PATH = "SET_PATH";
 export const SET_LOCATION = "SET_LOCATION";
+
+export const LOGIN_URL = '/signin';

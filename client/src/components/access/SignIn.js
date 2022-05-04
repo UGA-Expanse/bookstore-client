@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
 import axiosClient from "../../config/axios";
+import { useNavigate, useLocation } from 'react-router';
 
 import {Context, useUserContext} from "../../config/connector";
 
@@ -25,8 +26,15 @@ const signInStyle = {
 }
 
 
-export const SignIn = () => {
-      
+export const SignIn = (props) => {
+
+    const {forInternalUse=false, action} = props;
+
+    console.log("object keys: ", Object.keys(props));
+
+    let navigate = useNavigate();
+    let loc = useLocation();
+
     const appContext = useUserContext();
     const { user, getUser, checkUser } = appContext;
 
@@ -48,29 +56,32 @@ export const SignIn = () => {
     function handleChange(e) {
         const {name, type, value, checked} = e.target;
 
-        setFormData(prevFormData => ({
-            ...prevFormData,
-            [name]: type === "checkbox" ? checked : value
-        }));
+        // setFormData(prevFormData => ({
+        //     ...prevFormData,
+        //     [name]: type === "checkbox" ? checked : value
+        // }));
     }
 
-    function onFinish(values) {
-        const userinfo = {
-            username: values.username,
-            email: values.email,
-            password: values.password,
-            is_admin: false
-        };
+    function onFinish(values, e) 
+    {
+        let bodyFormData = new FormData();
+        bodyFormData.append('username', values.username);
+        bodyFormData.append('password', values.password);
 
-        checkUser(userinfo);
-        // console.log("checkUser(userinfo):", a);
-        // if ( a ) {
-        //     success();
-        // } else {
-        //     error();
-        // }
+        let err = checkUser(bodyFormData)
+        .then(resp => {
+            if (forInternalUse === 'false') {
+                let l = (loc.search && loc.search.length > 10) ? loc.search.substring(10) : action;
+                navigate(l);
+            } else {
 
+            }
+        })
+        .catch(err => {});
+        
     } // onFinished
+
+    // function doUserLogin()
 
     const onFinishFailed = (errorInfo) => {
         console.log('Input validation failed:', errorInfo);
@@ -104,6 +115,7 @@ export const SignIn = () => {
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"
+                        action="http://google.com"
                     >
                         <Form.Item
                             label="Username"
@@ -149,11 +161,7 @@ export const SignIn = () => {
                                 span: 16,
                             }}
                         >
-                            <Button type="primary" htmlType="button" onClick={fetchValue}>
-                                Fetch
-                            </Button>
-
-                            <Button type="primary" htmlType="button" onClick={postValue}>
+                            <Button type="primary" htmlType="submit">
                                 send
                             </Button>
                             

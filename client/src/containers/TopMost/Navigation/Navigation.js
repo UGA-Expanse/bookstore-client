@@ -23,7 +23,7 @@ const menuStyle = {
 
 export const Navigation = () => {
     const userContext = useUserContext();
-    const { user, cart, removeUser, getCart } = userContext;
+    const { user, cart, removeUser, getCart, isAuthenticated } = userContext;
 
     console.log(`Navigation.js>start>>user:${JSON.stringify(user)}`);
 
@@ -34,22 +34,27 @@ export const Navigation = () => {
     const [ activeItem, setActiveItem ] = useState(path);
 
     let navigate = useNavigate();
+    let loc = useLocation();
 
     // Functions
     const handleClick = e => {
         switch (e.key) {
             case "signoff" :
-                removeUser();
+                removeUser(user, cart)
+                .then(success => navigate("/signoff"));
                 break;
             case "cart" :
-                navigate("/cart");
+                navigate("/cart", );
+                break;
+            case "signin" :
+                navigate(`/signin?redirect=${loc.pathname}`);
                 break;
         }
     };
 
     const handleItemClick = (e, { name }) => setActiveItem(name);
     // States
-    const view = user ? (
+    const view = isAuthenticated() ? (
         
         <Menu
             selectedKeys={[path]}    
@@ -73,7 +78,7 @@ export const Navigation = () => {
             disabledOverflow={true}
             onClick={handleClick}>
                 <Menu.Item key="signup"><SignUp /></Menu.Item>
-                <Menu.Item key="signin"><SignIn /></Menu.Item>
+                <Menu.Item key="signin">SignIn</Menu.Item>
                 <Menu.Item key="cart" icon={<ShoppingOutlined />}>Shopping Cart</Menu.Item>
             </Menu>
     );
